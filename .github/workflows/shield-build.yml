@@ -33,6 +33,8 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.301
+    - name: Dotnet Sonarscanner tool installation
+      run: dotnet tool install --global dotnet-sonarscanner --version 4.10.0
     - name: Install dependencies
       run: dotnet restore $TEAMTWO_SHIELDSOURCE
     - name: Build
