@@ -3,8 +3,14 @@ name: TeamTwo.CloudShield.Shield
 on:
   push:
     branches: [ master ]
+    paths:
+    - './src/TeamTwo.CloudShield.Shield.sln'
+    - './src/TeamTwo.CloudShield.Shield/*'    
   pull_request:
     branches: [ master ]
+    paths:
+    - './src/TeamTwo.CloudShield.Shield.sln'
+    - './src/TeamTwo.CloudShield.Shield/*'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -29,7 +35,7 @@ jobs:
         dotnet-version: 3.1.301
     - name: Install dependencies
       run: dotnet restore
-      working-directory: ${TEAMTWO_SHIELDSOURCE}
+      working-directory: './src/TeamTwo.CloudShield.Shield.sln' 
     - name: Build
       run: dotnet build --configuration Release --no-restore
       working-directory: ${TEAMTWO_SHIELDSOURCE}
