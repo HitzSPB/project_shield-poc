@@ -2,17 +2,9 @@ name: TeamTwo.CloudShield.Shield
 
 on:
   push:
-    branches: [ master ]
-    paths:
-    - './src/TeamTwo.CloudShield.Shield.sln'
-    - './src/TeamTwo.CloudShield.Shield/*'
-    - '.github/workflows/shield-build.yml'    
+    branches: [ master ] 
   pull_request:
     branches: [ master ]
-    paths:
-    - './src/TeamTwo.CloudShield.Shield.sln'
-    - './src/TeamTwo.CloudShield.Shield/*'
-    - '.github/workflows/shield-build.yml'    
 jobs:
   build:
     runs-on: ubuntu-latest
