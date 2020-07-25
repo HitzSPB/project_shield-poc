@@ -36,10 +36,10 @@ jobs:
         dotnet-version: 3.1.301
     - name: Install dependencies
       run: dotnet restore
-      working-directory: 'src/TeamTwo.CloudShield.Shield/TeamTwo.CloudShield.Shield.sln' 
+      working-directory: '/src/TeamTwo.CloudShield.Shield/TeamTwo.CloudShield.Shield.sln' 
     - name: Build
       run: dotnet build --configuration Release --no-restore
-      working-directory: 'src/TeamTwo.CloudShield.Shield/TeamTwo.CloudShield.Shield.sln' 
+      working-directory: $TEAMTWO_SHIELDSOURCE 
     - name: Test
       run: dotnet test --no-restore --verbosity normal
       working-directory: $TEAMTWO_SHIELDSOURCE
