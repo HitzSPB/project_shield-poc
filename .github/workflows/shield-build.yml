@@ -24,7 +24,6 @@ jobs:
     - name: set environment variables
       uses: allenevans/set-env@v1.0.0
       with:
-        overwrite: false
         TEAMTWO_SHIELDSOURCE: 'src/TeamTwo.CloudShield.Shield/TeamTwo.CloudShield.Shield.sln'    
     - name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@v1.3
