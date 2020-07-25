@@ -39,7 +39,7 @@ jobs:
       working-directory: 'src/TeamTwo.CloudShield.Shield/TeamTwo.CloudShield.Shield.sln' 
     - name: Build
       run: dotnet build --configuration Release --no-restore
-      working-directory: $TEAMTWO_SHIELDSOURCE
+      working-directory: 'src/TeamTwo.CloudShield.Shield/TeamTwo.CloudShield.Shield.sln' 
     - name: Test
       run: dotnet test --no-restore --verbosity normal
       working-directory: $TEAMTWO_SHIELDSOURCE
