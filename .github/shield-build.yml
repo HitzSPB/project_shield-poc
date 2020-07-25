@@ -17,13 +17,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:    
     - uses: actions/checkout@v2
-- name: Setup .NET Core
+      with:
+        # Disabling shallow clone is recommended for improving relevancy of reporting
+        fetch-depth: 0
+    - name: set environment variables
+      uses: allenevans/set-env@v1.0.0
+      with:
+        TEAMTWO_SHIELDSOURCE: './src/TeamTwo.CloudShield.Shield/TeamTwo.CloudShield.Shield.sln'    
+    - name: SonarCloud Scan
+      uses: SonarSource/sonarcloud-github-action@v1.3
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.301
     - name: Install dependencies
-      run: dotnet restore 
+      run: dotnet restore $TEAMTWO_SHIELDSOURCE
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build --configuration Release --no-restore $TEAMTWO_SHIELDSOURCE 
     - name: Test
-      run: dotnet test --no-restore --verbosity normal
+      run: dotnet test $TEAMTWO_SHIELDSOURCE --no-restore --verbosity normal
