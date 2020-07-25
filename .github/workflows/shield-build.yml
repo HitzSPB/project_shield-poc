@@ -37,7 +37,6 @@ jobs:
     - name: Install dependencies
       run: dotnet restore $TEAMTWO_SHIELDSOURCE
     - name: Build
-      run: dotnet build $TEAMTWO_SHIELDSOURCE
+      run: dotnet build --configuration Release --no-restore $TEAMTWO_SHIELDSOURCE 
     - name: Test
       run: dotnet test $TEAMTWO_SHIELDSOURCE --no-restore --verbosity normal
-      working-directory: $TEAMTWO_SHIELDSOURCE
