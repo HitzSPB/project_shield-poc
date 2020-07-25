@@ -23,7 +23,8 @@ jobs:
     - name: set environment variables
       uses: allenevans/set-env@v1.0.0
       with:
-        TEAMTWO_SHIELDSOURCE: './src/TeamTwo.CloudShield.Shield/TeamTwo.CloudShield.Shield.sln'    
+        TEAMTWO_SHIELDSOURCE: './src/TeamTwo.CloudShield.Shield/TeamTwo.CloudShield.Shield.sln'
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
