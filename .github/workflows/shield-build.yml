@@ -35,11 +35,9 @@ jobs:
       with:
         dotnet-version: 3.1.301
     - name: Install dependencies
-      run: dotnet restore
-      working-directory: './src/TeamTwo.CloudShield.Shield/TeamTwo.CloudShield.Shield.sln'
+      run: dotnet restore $TEAMTWO_SHIELDSOURCE
     - name: Build
-      run: dotnet build --configuration Release --no-restore
-      working-directory: '/src/TeamTwo.CloudShield.Shield/TeamTwo.CloudShield.Shield.sln'
+      run: dotnet build $TEAMTWO_SHIELDSOURCE --configuration Release --no-restore
     - name: Test
-      run: dotnet test --no-restore --verbosity normal
+      run: dotnet test $TEAMTWO_SHIELDSOURCE --no-restore --verbosity normal
       working-directory: $TEAMTWO_SHIELDSOURCE
