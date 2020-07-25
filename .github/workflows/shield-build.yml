@@ -24,7 +24,7 @@ jobs:
     - name: set environment variables
       uses: allenevans/set-env@v1.0.0
       with:
-        TEAMTWO_SHIELDSOURCE: '/src/TeamTwo.CloudShield.Shield/TeamTwo.CloudShield.Shield.sln'    
+        TEAMTWO_SHIELDSOURCE: './src/TeamTwo.CloudShield.Shield/TeamTwo.CloudShield.Shield.sln'    
     - name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@v1.3
       env:
@@ -37,7 +37,7 @@ jobs:
     - name: Install dependencies
       run: dotnet restore $TEAMTWO_SHIELDSOURCE
     - name: Build
-      run: dotnet build $TEAMTWO_SHIELDSOURCE --configuration Release --no-restore
+      run: dotnet build $TEAMTWO_SHIELDSOURCE
     - name: Test
       run: dotnet test $TEAMTWO_SHIELDSOURCE --no-restore --verbosity normal
       working-directory: $TEAMTWO_SHIELDSOURCE
