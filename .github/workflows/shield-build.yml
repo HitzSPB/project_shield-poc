@@ -25,7 +25,7 @@ jobs:
       uses: allenevans/set-env@v1.0.0
       with:
         overwrite: false
-        TEAMTWO_SHIELDSOURCE: '/src/TeamTwo.CloudShield.Shield.sln'    
+        TEAMTWO_SHIELDSOURCE: 'src/TeamTwo.CloudShield.Shield/TeamTwo.CloudShield.Shield.sln'    
     - name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@v1.3
       env:
@@ -37,7 +37,7 @@ jobs:
         dotnet-version: 3.1.301
     - name: Install dependencies
       run: dotnet restore
-      working-directory: '/src/TeamTwo.CloudShield.Shield.sln' 
+      working-directory: 'src/TeamTwo.CloudShield.Shield/TeamTwo.CloudShield.Shield.sln' 
     - name: Build
       run: dotnet build --configuration Release --no-restore
       working-directory: ${TEAMTWO_SHIELDSOURCE}
