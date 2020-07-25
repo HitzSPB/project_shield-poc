@@ -5,12 +5,14 @@ on:
     branches: [ master ]
     paths:
     - './src/TeamTwo.CloudShield.Shield.sln'
-    - './src/TeamTwo.CloudShield.Shield/*'    
+    - './src/TeamTwo.CloudShield.Shield/*'
+    - '-/.github/workflows/shield-build.yml'    
   pull_request:
     branches: [ master ]
     paths:
     - './src/TeamTwo.CloudShield.Shield.sln'
     - './src/TeamTwo.CloudShield.Shield/*'
+    - '-/.github/workflows/shield-build.yml'    
 jobs:
   build:
     runs-on: ubuntu-latest
