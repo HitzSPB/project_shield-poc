@@ -5,13 +5,15 @@ on:
     paths:
     - './src/TeamTwo.CloudShield.Shield.sln'
     - './src/TeamTwo.CloudShield.Shield/*'
-    - '.github/workflows/shield-build.yml'   
+    - '.github/workflows/shield-build.yml'
+    - 'sonar-project.properties'    
   pull_request:
     branches: [ master ]
     paths:
     - './src/TeamTwo.CloudShield.Shield.sln'
     - './src/TeamTwo.CloudShield.Shield/*'
-    - '.github/workflows/shield-build.yml'   
+    - '.github/workflows/shield-build.yml'
+    - 'sonar-project.properties'       
 jobs:
   build:
     runs-on: ubuntu-latest
