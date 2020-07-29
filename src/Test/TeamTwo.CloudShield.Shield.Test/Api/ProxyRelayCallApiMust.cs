@@ -25,7 +25,7 @@ namespace TeamTwo.CloudShield.Shield.Test
       // Arrange
       IProxyRelayCallService proxyRelayCallService = A.Fake<IProxyRelayCallService>();
       ILogger log = A.Fake<ILogger>();
-      var sut = new ProxyRelayCallApi();
+      var sut = new ProxyRelayCallApi(proxyRelayCallService);
       var httpContext = new DefaultHttpContext();
       var httpRequest = new DefaultHttpRequest(httpContext);
       httpRequest.Body = new MemoryStream(Encoding.ASCII.GetBytes(JsonConvert.SerializeObject("test")));
@@ -42,7 +42,7 @@ namespace TeamTwo.CloudShield.Shield.Test
       // Arrange
       IProxyRelayCallService proxyRelayCallService = A.Fake<IProxyRelayCallService>();
       ILogger log = A.Fake<ILogger>();
-      var sut = new ProxyRelayCallApi();
+      var sut = new ProxyRelayCallApi(proxyRelayCallService);
       var httpContext = new DefaultHttpContext();
       var httpRequest = new DefaultHttpRequest(httpContext);
       // Act
@@ -58,7 +58,7 @@ namespace TeamTwo.CloudShield.Shield.Test
       // Arrange
       IProxyRelayCallService proxyRelayCallService = A.Fake<IProxyRelayCallService>();
       ILogger log = A.Fake<ILogger>();
-      var sut = new ProxyRelayCallApi();
+      var sut = new ProxyRelayCallApi(proxyRelayCallService);
       var httpContext = new DefaultHttpContext();
       var httpRequest = new DefaultHttpRequest(httpContext);
 
@@ -73,7 +73,7 @@ namespace TeamTwo.CloudShield.Shield.Test
       // Arrange
       IProxyRelayCallService proxyRelayCallService = A.Fake<IProxyRelayCallService>();
       ILogger log = A.Fake<ILogger>();
-      var sut = new ProxyRelayCallApi();
+      var sut = new ProxyRelayCallApi(proxyRelayCallService);
       var httpContext = new DefaultHttpContext();
       var httpRequest = new DefaultHttpRequest(httpContext);
       httpRequest.Body = new MemoryStream(Encoding.ASCII.GetBytes(JsonConvert.SerializeObject("test")));
