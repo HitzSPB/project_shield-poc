@@ -18,6 +18,5 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Infrastructure\" />
-    <Folder Include="Service\" />
   </ItemGroup>
 </Project>
