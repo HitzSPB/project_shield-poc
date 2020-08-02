@@ -1,5 +1,5 @@
 ﻿using TeamTwo.CloudShield.Shield.Infrastructures.Models;
-using TeamTwo.CloudShield.Shield.Service.Model;
+using TeamTwo.CloudShield.Shield.Service.Models;
 
 namespace TeamTwo.CloudShield.Shield.Infrastructures.Mappers
 {

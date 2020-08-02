@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using TeamTwo.CloudShield.Shield.Service.Model;
+using TeamTwo.CloudShield.Shield.Service.Models;
 
-namespace TeamTwo.CloudShield.Shield.Infrastructure
+namespace TeamTwo.CloudShield.Shield.Infrastructures
 {
   public interface IStorageApiClient
   {
