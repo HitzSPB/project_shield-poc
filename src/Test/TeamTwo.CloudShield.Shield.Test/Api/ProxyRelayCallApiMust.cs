@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using System.Net;
-using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using FakeItEasy;
@@ -27,13 +26,15 @@ namespace TeamTwo.CloudShield.Shield.Test
       ILogger log = A.Fake<ILogger>();
       var sut = new ProxyRelayCallApi(proxyRelayCallService);
       var httpContext = new DefaultHttpContext();
-      var httpRequest = new DefaultHttpRequest(httpContext);
-      httpRequest.Body = new MemoryStream(Encoding.ASCII.GetBytes(JsonConvert.SerializeObject("test")));
+      var httpRequest = new DefaultHttpRequest(httpContext)
+      {
+        Body = new MemoryStream(Encoding.ASCII.GetBytes(JsonConvert.SerializeObject("test")))
+      };
       // Act
       IActionResult response = await sut.RelayCallAsync(httpRequest, Guid.NewGuid().ToString(), log);
 
       // Assert
-      Assert.Equal((int) HttpStatusCode.OK, (int) ((StatusCodeResult) response).StatusCode);
+      Assert.Equal((int) HttpStatusCode.OK, ((StatusCodeResult) response).StatusCode);
     }
     [Fact]
     [Trait("category", "unit")]
@@ -49,7 +50,7 @@ namespace TeamTwo.CloudShield.Shield.Test
       IActionResult response = await sut.RelayCallAsync(httpRequest, "34fe", log);
 
       // Assert
-      Assert.Equal((int) HttpStatusCode.BadRequest, (int) ((StatusCodeResult) response).StatusCode);
+      Assert.Equal((int) HttpStatusCode.BadRequest, ((StatusCodeResult) response).StatusCode);
     }
     [Fact]
     [Trait("category", "unit")]
@@ -75,13 +76,15 @@ namespace TeamTwo.CloudShield.Shield.Test
       ILogger log = A.Fake<ILogger>();
       var sut = new ProxyRelayCallApi(proxyRelayCallService);
       var httpContext = new DefaultHttpContext();
-      var httpRequest = new DefaultHttpRequest(httpContext);
-      httpRequest.Body = new MemoryStream(Encoding.ASCII.GetBytes(JsonConvert.SerializeObject("test")));
+      var httpRequest = new DefaultHttpRequest(httpContext)
+      {
+        Body = new MemoryStream(Encoding.ASCII.GetBytes(JsonConvert.SerializeObject("test")))
+      };
       // Act
       IActionResult response = await sut.RelayCallAsync(httpRequest, Guid.NewGuid().ToString(), log);
 
       // Assert
-      Assert.Equal((int) HttpStatusCode.OK, (int) ((StatusCodeResult) response).StatusCode);
+      Assert.Equal((int) HttpStatusCode.OK, ((StatusCodeResult) response).StatusCode);
     }
   }
 }

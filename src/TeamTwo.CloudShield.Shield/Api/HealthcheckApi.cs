@@ -1,21 +1,19 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using System.IO;
-using System.Threading.Tasks;
 namespace TeamTwo.CloudShield.Shield.Api
 {
-	public class HealthcheckApi
-	{
+  public class HealthcheckApi
+  {
     // Todo consider if this is needed with the options of Azure health service, application insights & Azure alerts
-		[FunctionName("HealthCheck")]
-		public static async Task<IActionResult> HealthCheckAsync([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = "healthcheck")]
-		HttpRequest req, ILogger log)
-		{
-			return new OkObjectResult(null);
-		}
-	}
+    [FunctionName("HealthCheck")]
+    public static async Task<IActionResult> HealthCheckAsync([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = "healthcheck")]
+        HttpRequest req, ILogger log)
+    {
+      return new OkObjectResult(null);
+    }
+  }
 }
