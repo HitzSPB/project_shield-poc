@@ -34,7 +34,7 @@ namespace TeamTwo.CloudShield.Shield.Api
       {
         Content = await response.Content.ReadAsStringAsync(),
         ContentType = "text/plain",
-        StatusCode = (int)response.StatusCode
+        StatusCode = (int) response.StatusCode
       };
     }
   }
