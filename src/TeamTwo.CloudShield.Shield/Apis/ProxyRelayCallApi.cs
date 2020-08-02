@@ -28,7 +28,7 @@ namespace TeamTwo.CloudShield.Shield.Api
       log.LogInformation("C# HTTP trigger function processed a request.");
       var requestBody = await new StreamReader(req.Body).ReadToEndAsync();
       if (string.IsNullOrWhiteSpace(requestBody)) throw new ArgumentNullException(nameof(req.Body));
-      HttpResponseMessage response = await _proxyRelayCallService.ProxyRelayCallAsync(tenantId, requestBody, new HttpMethod(req.Method));
+      HttpResponseMessage response = await _proxyRelayCallService.ProxyRelayCallAsync(tenantId, requestBody, new HttpMethod(req.Method), req.Headers);
 
       return new ContentResult()
       {
