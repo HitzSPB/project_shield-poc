@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TeamTwo.CloudShield.Shield.Service.Model
+namespace TeamTwo.CloudShield.Shield.Service.Models
 {
   public class HybridConnectionDto
   {

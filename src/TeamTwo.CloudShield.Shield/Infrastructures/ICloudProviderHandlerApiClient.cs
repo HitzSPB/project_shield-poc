@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace TeamTwo.CloudShield.Shield.Infrastructure
+namespace TeamTwo.CloudShield.Shield.Infrastructures
 {
   public interface ICloudProviderHandlerApiClient
   {

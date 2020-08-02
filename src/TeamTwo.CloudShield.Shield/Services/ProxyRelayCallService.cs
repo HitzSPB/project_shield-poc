@@ -3,10 +3,10 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using TeamTwo.CloudShield.Shield.Infrastructure;
-using TeamTwo.CloudShield.Shield.Service.Model;
+using TeamTwo.CloudShield.Shield.Infrastructures;
+using TeamTwo.CloudShield.Shield.Service.Models;
 
-namespace TeamTwo.CloudShield.Shield.Service
+namespace TeamTwo.CloudShield.Shield.Services
 {
   public class ProxyRelayCallService : IProxyRelayCallService
   {

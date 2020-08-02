@@ -2,10 +2,10 @@
 using Microsoft.Azure.Cosmos;
 using TeamTwo.CloudShield.Shield.Infrastructures.Mappers;
 using TeamTwo.CloudShield.Shield.Infrastructures.Models;
-using TeamTwo.CloudShield.Shield.Service.Model;
+using TeamTwo.CloudShield.Shield.Service.Models;
 using TeamTwo.CloudShield.Shield.Utilities;
 
-namespace TeamTwo.CloudShield.Shield.Infrastructure
+namespace TeamTwo.CloudShield.Shield.Infrastructures
 {
   public class StorageApiClient : IStorageApiClient
   {

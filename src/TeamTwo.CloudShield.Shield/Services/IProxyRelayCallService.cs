@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 
-namespace TeamTwo.CloudShield.Shield.Service
+namespace TeamTwo.CloudShield.Shield.Services
 {
   public interface IProxyRelayCallService
   {
