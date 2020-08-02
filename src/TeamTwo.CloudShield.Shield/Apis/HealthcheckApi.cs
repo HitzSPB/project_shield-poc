@@ -11,7 +11,7 @@ namespace TeamTwo.CloudShield.Shield.Apis
   {
     // Todo consider if this is needed with the options of Azure health service, application insights & Azure alerts
     [FunctionName("HealthCheck")]
-    public static async Task<IActionResult> HealthCheckAsync([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = "healthcheck")]
+    public async Task<IActionResult> HealthCheckAsync([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = "healthcheck")]
         HttpRequest req, ILogger log)
     {
       return new OkObjectResult(null);

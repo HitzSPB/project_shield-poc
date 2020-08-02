@@ -22,7 +22,7 @@ namespace TeamTwo.CloudShield.Shield.Apis
     }
 
     [FunctionName("GetRelayInformation")]
-    public async Task<IActionResult> GetRelayInformationAsync([HttpTrigger(AuthorizationLevel.Function, "get", "post",
+    public async Task<IActionResult> GetRelayInformationAsync([HttpTrigger(AuthorizationLevel.Function, "get",
             Route = "relay-management/relayinfo/{RelayId}")] HttpRequest req, string relayId, ILogger log)
     {
       HybridConnectionDto response = await _relayManagementService.GetRelayAsync(relayId);
@@ -33,7 +33,7 @@ namespace TeamTwo.CloudShield.Shield.Apis
     }
 
     [FunctionName("PostRelayInformation")]
-    public async Task<IActionResult> PostRelayInformationAsync([HttpTrigger(AuthorizationLevel.Function, "get", "post",
+    public async Task<IActionResult> PostRelayInformationAsync([HttpTrigger(AuthorizationLevel.Function, "post",
             Route = "relay-management/relayinfo}")] HttpRequest req, string relayId, ILogger log)
     {
       var requestBody = await new StreamReader(req.Body).ReadToEndAsync();
