@@ -17,6 +17,7 @@ namespace TeamTwo.CloudShield.Shield.Services
       _storageApiClient = storageApiClient;
       _relayApiClient = relayApiClient;
     }
+
     async Task<HttpResponseMessage> IProxyRelayCallService.ProxyRelayCallAsync(string tenantId, string body, HttpMethod httpMethod, IHeaderDictionary httpHeaders)
     {
       if (string.IsNullOrWhiteSpace(body)) throw new ArgumentNullException(nameof(body));

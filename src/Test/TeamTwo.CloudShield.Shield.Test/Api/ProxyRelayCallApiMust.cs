@@ -9,8 +9,8 @@ using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using TeamTwo.CloudShield.Shield.Api;
-using TeamTwo.CloudShield.Shield.Service;
+using TeamTwo.CloudShield.Shield.Apis;
+using TeamTwo.CloudShield.Shield.Services;
 using Xunit;
 
 namespace TeamTwo.CloudShield.Shield.Test
