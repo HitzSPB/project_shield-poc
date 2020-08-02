@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Build.Utilities;
+﻿using System.Threading.Tasks;
 using TeamTwo.CloudProvider.Management.Services.Models;
 
 namespace TeamTwo.CloudProvider.Management.Services

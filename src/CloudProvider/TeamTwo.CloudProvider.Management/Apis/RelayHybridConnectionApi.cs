@@ -1,15 +1,13 @@
-using System;
 using System.IO;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using TeamTwo.CloudProvider.Management.Services.Models;
 using TeamTwo.CloudProvider.Management.Services;
-using System.Runtime.InteropServices.ComTypes;
+using TeamTwo.CloudProvider.Management.Services.Models;
 
 namespace TeamTwo.CloudProvider.Management
 {
