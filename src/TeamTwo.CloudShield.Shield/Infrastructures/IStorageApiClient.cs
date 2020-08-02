@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using TeamTwo.CloudShield.Shield.Infrastructures.Models;
 using TeamTwo.CloudShield.Shield.Service.Model;
 
 namespace TeamTwo.CloudShield.Shield.Infrastructure

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using TeamTwo.CloudShield.Shield.Infrastructures.Models;
+﻿using TeamTwo.CloudShield.Shield.Infrastructures.Models;
 using TeamTwo.CloudShield.Shield.Service.Model;
 
 namespace TeamTwo.CloudShield.Shield.Infrastructures.Mappers

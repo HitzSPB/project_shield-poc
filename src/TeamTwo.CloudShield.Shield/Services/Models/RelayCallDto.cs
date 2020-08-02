@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Net.Http;
-using System.Text;
+﻿using System.Net.Http;
 using Microsoft.AspNetCore.Http;
 
 namespace TeamTwo.CloudShield.Shield.Service.Model
