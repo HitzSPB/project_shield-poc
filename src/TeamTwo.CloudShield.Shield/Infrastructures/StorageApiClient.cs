@@ -30,7 +30,7 @@ namespace TeamTwo.CloudShield.Shield.Infrastructures
       return _hybridConnectionDtoMapper.HybridConnectionDtoMap(cosmosDbResponse.Resource);
     }
 
-    async Task<HybridConnectionDto> IStorageApiClient.StoreRelay(string tenantId, HybridConnectionDto hybridConnectionDto)
+    async Task<HybridConnectionDto> IStorageApiClient.StoreRelayAsync(string tenantId, HybridConnectionDto hybridConnectionDto)
     {
       Database database = await _cosmosClient.CreateDatabaseIfNotExistsAsync("RelayProxyDatabase");
       Container container = await database.CreateContainerIfNotExistsAsync("ProxyRelayContainer", "/Connections");

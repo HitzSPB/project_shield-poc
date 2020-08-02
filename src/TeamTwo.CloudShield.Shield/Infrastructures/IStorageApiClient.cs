@@ -6,6 +6,6 @@ namespace TeamTwo.CloudShield.Shield.Infrastructures
   public interface IStorageApiClient
   {
     Task<HybridConnectionDto> GetRelayFromIdAsync(string tenantId);
-    Task<HybridConnectionDto> StoreRelay(string tenantId, HybridConnectionDto hybridConnectionDto);
+    Task<HybridConnectionDto> StoreRelayAsync(string tenantId, HybridConnectionDto hybridConnectionDto);
   }
 }
