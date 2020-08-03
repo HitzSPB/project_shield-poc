@@ -2,9 +2,9 @@
 
 namespace TeamTwo.CloudShield.Shield.Utilities
 {
-  public class ApplicationsSettings : IApplicationsSettings
+  public class ApplicationsSettingsService : IApplicationsSettingsService
   {
-    string IApplicationsSettings.GetProcessEnvironmentVariable(string environmentName)
+    string IApplicationsSettingsService.GetProcessEnvironmentVariable(string environmentName)
     {
       return Environment.GetEnvironmentVariable(environmentName, EnvironmentVariableTarget.Process);
     }

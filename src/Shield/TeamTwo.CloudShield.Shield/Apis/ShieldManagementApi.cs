@@ -34,7 +34,7 @@ namespace TeamTwo.CloudShield.Shield.Apis
 
     [FunctionName("PostRelayInformation")]
     public async Task<IActionResult> PostRelayInformationAsync([HttpTrigger(AuthorizationLevel.Function, "post",
-            Route = "relay-management/relayinfo}")] HttpRequest req, string relayId, ILogger log)
+            Route = "relay-management/")] HttpRequest req, ILogger log)
     {
       var requestBody = await new StreamReader(req.Body).ReadToEndAsync();
       if (requestBody is null) throw new ArgumentNullException(nameof(requestBody));
