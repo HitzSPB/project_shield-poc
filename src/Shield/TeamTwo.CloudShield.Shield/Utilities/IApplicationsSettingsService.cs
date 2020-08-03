@@ -1,6 +1,6 @@
 ﻿namespace TeamTwo.CloudShield.Shield.Utilities
 {
-  public interface IApplicationsSettings
+  public interface IApplicationsSettingsService
   {
     string GetProcessEnvironmentVariable(string environmentName);
   }
