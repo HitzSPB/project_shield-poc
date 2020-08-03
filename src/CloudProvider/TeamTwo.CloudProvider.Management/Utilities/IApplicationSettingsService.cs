@@ -1,6 +1,6 @@
 ﻿namespace TeamTwo.CloudProvider.Management.Utilities
 {
-  public interface IApplicationsSettings
+  public interface IApplicationSettingsService
   {
     string GetProcessEnvironmentVariable(string environmentName);
   }

@@ -13,8 +13,8 @@ namespace TeamTwo.CloudProvider.Management
 {
   public class RelayHybridConnectionApi
   {
-    private readonly IRelayAzureManagement _relayAzureManagement;
-    public RelayHybridConnectionApi(IRelayAzureManagement relayAzureManagement)
+    private readonly IRelayAzureManagementService _relayAzureManagement;
+    public RelayHybridConnectionApi(IRelayAzureManagementService relayAzureManagement)
     {
       _relayAzureManagement = relayAzureManagement;
     }

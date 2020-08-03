@@ -2,9 +2,9 @@
 
 namespace TeamTwo.CloudProvider.Management.Utilities
 {
-  public class ApplicationsSettings : IApplicationsSettings
+  public class ApplicationSettingsService : IApplicationSettingsService
   {
-    string IApplicationsSettings.GetProcessEnvironmentVariable(string environmentName)
+    string IApplicationSettingsService.GetProcessEnvironmentVariable(string environmentName)
     {
       return Environment.GetEnvironmentVariable(environmentName, EnvironmentVariableTarget.Process);
     }
