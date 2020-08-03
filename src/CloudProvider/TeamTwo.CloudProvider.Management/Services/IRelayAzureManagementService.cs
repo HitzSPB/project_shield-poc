@@ -3,7 +3,7 @@ using TeamTwo.CloudProvider.Management.Services.Models;
 
 namespace TeamTwo.CloudProvider.Management.Services
 {
-  public interface IRelayAzureManagement
+  public interface IRelayAzureManagementService
   {
     Task<HybridConnectionDto> CreateHybridConnection(CreateRelayDto createRelayStorageDto);
   }
