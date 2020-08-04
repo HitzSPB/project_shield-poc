@@ -19,7 +19,10 @@ namespace TeamTwo.CloudShield.Shield
       builder.Services.AddTransient<IStorageApiClient, StorageApiClient>();
       builder.Services.AddTransient<IApplicationsSettingsService, ApplicationsSettingsService>();
       builder.Services.AddTransient<IHybridConnectionDtoMapper, HybridConnectionDtoMapper>();
+      builder.Services.AddTransient<IRelayApiClient, RelayApiClient>();
+
       builder.Services.AddHttpClient<ICloudProviderHandlerApiClient, CloudProviderHandlerApiClient>();
+      builder.Services.AddHttpClient<IRelayApiClient, RelayApiClient>();
     }
   }
 }

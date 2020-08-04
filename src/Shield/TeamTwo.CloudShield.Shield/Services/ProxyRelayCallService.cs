@@ -18,7 +18,7 @@ namespace TeamTwo.CloudShield.Shield.Services
       _relayApiClient = relayApiClient;
     }
 
-    async Task<HttpResponseMessage> IProxyRelayCallService.ProxyRelayCallAsync(string tenantId, string body, HttpMethod httpMethod, IHeaderDictionary httpHeaders)
+    async Task<HttpResponseMessage> IProxyRelayCallService.ProxyRelayCallAsync(string tenantId, string body, HttpMethod httpMethod, IHeaderDictionary httpHeaders, string url)
     {
       if (string.IsNullOrWhiteSpace(body)) throw new ArgumentNullException(nameof(body));
       if (string.IsNullOrWhiteSpace(tenantId)) throw new ArgumentNullException(nameof(tenantId));
@@ -29,7 +29,7 @@ namespace TeamTwo.CloudShield.Shield.Services
       if (hybridConnectionDto is null)
         return new HttpResponseMessage(HttpStatusCode.NotFound);
 
-      var relayCallDto = new RelayCallDto(hybridConnectionDto, body, httpMethod, httpHeaders);
+      var relayCallDto = new RelayCallDto(hybridConnectionDto, body, httpMethod, httpHeaders, url);
       return await _relayApiClient.RelayCallAsync(relayCallDto);
     }
   }
