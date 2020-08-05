@@ -1,35 +1,35 @@
-using System;
-using System.IO;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
+using TeamTwo.Customer.Management.Services;
 
 namespace TeamTwo.Customer.Management
 {
-    public class CustomerManagementFunctions
+  public class CustomerManagementFunctions
+  {
+    private readonly ICustomerManagementService _customerManagementService;
+    public CustomerManagementFunctions(ICustomerManagementService customerManagementService)
     {
-        [FunctionName("CustomerManagement")]
-        public async Task<IActionResult> CustomerManagementAsync(
-            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
-            ILogger log)
-        {
-            log.LogInformation("C# HTTP trigger function processed a request.");
-
-            string name = req.Query["name"];
-
-            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            dynamic data = JsonConvert.DeserializeObject(requestBody);
-            name = name ?? data?.name;
-
-            string responseMessage = string.IsNullOrEmpty(name)
-                ? "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response."
-                : $"Hello, {name}. This HTTP triggered function executed successfully.";
-
-            return new OkObjectResult(responseMessage);
-        }
+      _customerManagementService = customerManagementService;
     }
+
+    [FunctionName("CustomerManagement")]
+    public async Task<IActionResult> CustomerManagementAsync(
+        [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
+        ILogger log)
+    {
+      log.LogInformation("C# HTTP trigger function processed a request.");
+      return new OkResult();
+    }
+
+    public override bool Equals(object obj)
+    {
+      return obj is CustomerManagementFunctions functions &&
+             EqualityComparer<ICustomerManagementService>.Default.Equals(_customerManagementService, functions._customerManagementService);
+    }
+  }
 }
