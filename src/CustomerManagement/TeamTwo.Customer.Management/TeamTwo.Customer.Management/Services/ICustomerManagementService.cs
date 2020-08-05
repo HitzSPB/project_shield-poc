@@ -4,8 +4,7 @@ using System.Text;
 
 namespace TeamTwo.Customer.Management.Services
 {
-  public class CustomerManagementService : ICustomerManagementService
+  public interface ICustomerManagementService
   {
-    
   }
 }
