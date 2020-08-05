@@ -25,11 +25,13 @@ namespace TeamTwo.CloudShield.Shield.Apis
     public async Task<IActionResult> GetRelayInformationAsync([HttpTrigger(AuthorizationLevel.Function, "get",
             Route = "relay-management/relayinfo/{RelayId}")] HttpRequest req, string relayId, ILogger log)
     {
+      if (string.IsNullOrWhiteSpace(relayId)) throw new ArgumentNullException(nameof(relayId));
+
       HybridConnectionDto response = await _relayManagementService.GetRelayAsync(relayId);
       if (response != null)
         return new OkObjectResult(response);
       else
-        return new BadRequestResult();
+        return new NotFoundResult();
     }
 
     [FunctionName("PostRelayInformation")]
