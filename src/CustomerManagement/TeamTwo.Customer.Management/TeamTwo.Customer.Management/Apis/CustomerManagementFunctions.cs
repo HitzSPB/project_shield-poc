@@ -19,7 +19,7 @@ namespace TeamTwo.Customer.Management
 
     [FunctionName("CustomerManagement")]
     public async Task<IActionResult> CustomerManagementAsync(
-        [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
+        [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = "customer/management/{customerid}")] HttpRequest req, string customerId,
         ILogger log)
     {
       log.LogInformation("C# HTTP trigger function processed a request.");
