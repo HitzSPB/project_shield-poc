@@ -1,4 +1,5 @@
-﻿using TeamTwo.Customer.Management.Utilities;
+﻿using System.Threading.Tasks;
+using TeamTwo.Customer.Management.Utilities;
 
 namespace TeamTwo.Customer.Management.Infrastructure
 {
@@ -8,6 +9,16 @@ namespace TeamTwo.Customer.Management.Infrastructure
     public CustomerManagementStorageApiClient(IApplicationSettingsService applicationSettingsService)
     {
       _applicationSettingsService = applicationSettingsService;
+    }
+
+    Task<object> ICustomerManagementStorageApiClient.GetCustomer(string tenantId)
+    {
+      throw new System.NotImplementedException();
+    }
+
+    Task<object> ICustomerManagementStorageApiClient.StoreCustomer(string custonemerId)
+    {
+      throw new System.NotImplementedException();
     }
   }
 }
