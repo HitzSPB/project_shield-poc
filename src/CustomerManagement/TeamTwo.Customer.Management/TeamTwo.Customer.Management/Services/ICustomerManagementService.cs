@@ -5,7 +5,7 @@ namespace TeamTwo.Customer.Management.Services
 {
   public interface ICustomerManagementService
   {
-    Task<string> GetCustomerInformation();
-    Task<string> StoreCustomerInformation();
+    Task<string> GetCustomerInformation(string customerId);
+    Task<string> StoreCustomerInformation(string customerId);
   }
 }

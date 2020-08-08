@@ -1,10 +1,12 @@
-using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using TeamTwo.Customer.Management.Apis.Models;
 using TeamTwo.Customer.Management.Services;
 
 namespace TeamTwo.Customer.Management
@@ -17,19 +19,25 @@ namespace TeamTwo.Customer.Management
       _customerManagementService = customerManagementService;
     }
 
-    [FunctionName("CustomerManagement")]
-    public async Task<IActionResult> CustomerManagementAsync(
-        [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = "customer/management/{customerid}")] HttpRequest req, string customerId,
+    [FunctionName("GetCustomer")]
+    public async Task<IActionResult> GetCustomerAsync(
+        [HttpTrigger(AuthorizationLevel.Function, "get", Route = "customer/management/{customerid}")] HttpRequest req, string customerId,
         ILogger log)
     {
-      log.LogInformation("C# HTTP trigger function processed a request.");
+      var a = _customerManagementService.GetCustomerInformation(customerId);
       return new OkResult();
     }
 
-    public override bool Equals(object obj)
+    [FunctionName("StoreCustomer")]
+    public async Task<IActionResult> StoreCustomerAsync(
+    [HttpTrigger(AuthorizationLevel.Function, "get", Route = "customer/management")] HttpRequest req, string customerId,
+    ILogger log)
     {
-      return obj is CustomerManagementFunctions functions &&
-             EqualityComparer<ICustomerManagementService>.Default.Equals(_customerManagementService, functions._customerManagementService);
+      var requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+      StoreCustomerDto storeCustomer = JsonConvert.DeserializeObject<StoreCustomerDto>(requestBody);
+
+      var a = _customerManagementService.StoreCustomerInformation(storeCustomer.customerId);
+      return new OkResult();
     }
   }
 }
