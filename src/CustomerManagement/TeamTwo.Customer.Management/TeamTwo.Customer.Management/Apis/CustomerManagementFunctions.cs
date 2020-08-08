@@ -24,7 +24,7 @@ namespace TeamTwo.Customer.Management
         [HttpTrigger(AuthorizationLevel.Function, "get", Route = "customer/management/{customerid}")] HttpRequest req, string customerId,
         ILogger log)
     {
-      var a = _customerManagementService.GetCustomerInformation(customerId);
+      var a = _customerManagementService.GetCustomerInformationAsync(customerId);
       return new OkResult();
     }
 
@@ -34,9 +34,9 @@ namespace TeamTwo.Customer.Management
     ILogger log)
     {
       var requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-      StoreCustomerDto storeCustomer = JsonConvert.DeserializeObject<StoreCustomerDto>(requestBody);
+      StoreCustomer storeCustomer = JsonConvert.DeserializeObject<StoreCustomer>(requestBody);
 
-      var a = _customerManagementService.StoreCustomerInformation(storeCustomer.customerId);
+      var a = _customerManagementService.StoreCustomerInformationAsync(storeCustomer.customerId);
       return new OkResult();
     }
   }

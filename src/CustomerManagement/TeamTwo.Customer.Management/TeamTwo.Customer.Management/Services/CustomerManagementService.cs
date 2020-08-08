@@ -1,5 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using TeamTwo.Customer.Management.Infrastructure;
+using TeamTwo.Customer.Management.Services.Models;
 
 namespace TeamTwo.Customer.Management.Services
 {
@@ -10,14 +12,18 @@ namespace TeamTwo.Customer.Management.Services
     {
       _customerManagementStorageApiClient = customerManagementStorageApiClient;
     }
-    Task<string> ICustomerManagementService.GetCustomerInformation(string customerId)
+    async Task<CustomerInfo> ICustomerManagementService.GetCustomerInformationAsync(string customerId)
     {
-      throw new System.NotImplementedException();
+      if (string.IsNullOrWhiteSpace(customerId)) throw new ArgumentNullException(nameof(customerId));
+      return await _customerManagementStorageApiClient.GetCustomerAsync(customerId);
     }
 
-    Task<string> ICustomerManagementService.StoreCustomerInformation(string customerId)
+    async Task<CustomerInfo> ICustomerManagementService.StoreCustomerInformationAsync(string customerId)
     {
-      throw new System.NotImplementedException();
+      if (string.IsNullOrWhiteSpace(customerId)) throw new ArgumentNullException(nameof(customerId));
+
+      var customer = new CustomerInfo(customerId, Guid.NewGuid());
+      return await _customerManagementStorageApiClient.StoreCustomerAsync(customer);
     }
   }
 }
