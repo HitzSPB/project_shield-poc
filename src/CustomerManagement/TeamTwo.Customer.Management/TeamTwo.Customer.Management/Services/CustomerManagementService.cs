@@ -10,12 +10,12 @@ namespace TeamTwo.Customer.Management.Services
     {
       _customerManagementStorageApiClient = customerManagementStorageApiClient;
     }
-    Task<string> ICustomerManagementService.GetCustomerInformation()
+    Task<string> ICustomerManagementService.GetCustomerInformation(string customerId)
     {
       throw new System.NotImplementedException();
     }
 
-    Task<string> ICustomerManagementService.StoreCustomerInformation()
+    Task<string> ICustomerManagementService.StoreCustomerInformation(string customerId)
     {
       throw new System.NotImplementedException();
     }
