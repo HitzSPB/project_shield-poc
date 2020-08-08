@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using TeamTwo.Customer.Management.Apis.Models;
 using TeamTwo.Customer.Management.Services;
+using TeamTwo.Customer.Management.Services.Models;
 
 namespace TeamTwo.Customer.Management
 {
@@ -24,8 +25,8 @@ namespace TeamTwo.Customer.Management
         [HttpTrigger(AuthorizationLevel.Function, "get", Route = "customer/management/{customerid}")] HttpRequest req, string customerId,
         ILogger log)
     {
-      var a = _customerManagementService.GetCustomerInformationAsync(customerId);
-      return new OkResult();
+      CustomerInfo customerInfo = await _customerManagementService.GetCustomerInformationAsync(customerId);
+      return new OkObjectResult(customerInfo);
     }
 
     [FunctionName("StoreCustomer")]
@@ -36,8 +37,8 @@ namespace TeamTwo.Customer.Management
       var requestBody = await new StreamReader(req.Body).ReadToEndAsync();
       StoreCustomer storeCustomer = JsonConvert.DeserializeObject<StoreCustomer>(requestBody);
 
-      var a = _customerManagementService.StoreCustomerInformationAsync(storeCustomer.customerId);
-      return new OkResult();
+      CustomerInfo customerInfo = await _customerManagementService.StoreCustomerInformationAsync(storeCustomer.customerId);
+      return new OkObjectResult(customerInfo);
     }
   }
 }
