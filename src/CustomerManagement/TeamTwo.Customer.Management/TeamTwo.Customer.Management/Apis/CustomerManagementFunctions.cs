@@ -7,6 +7,7 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using TeamTwo.Customer.Management.Apis.Models;
+using TeamTwo.Customer.Management.Infrastructure.Models;
 using TeamTwo.Customer.Management.Services;
 using TeamTwo.Customer.Management.Services.Models;
 
