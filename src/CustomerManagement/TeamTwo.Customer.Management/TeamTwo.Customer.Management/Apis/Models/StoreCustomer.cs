@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TeamTwo.Customer.Management.Apis.Models
 {
-  public class StoreCustomerDto
+  public class StoreCustomer
   {
     public string customerId { get; set; }
   }

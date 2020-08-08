@@ -1,11 +1,12 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.Build.Utilities;
+using TeamTwo.Customer.Management.Services.Models;
 
 namespace TeamTwo.Customer.Management.Services
 {
   public interface ICustomerManagementService
   {
-    Task<string> GetCustomerInformation(string customerId);
-    Task<string> StoreCustomerInformation(string customerId);
+    Task<CustomerInfo> GetCustomerInformationAsync(string customerId);
+    Task<CustomerInfo> StoreCustomerInformationAsync(string customerId);
   }
 }

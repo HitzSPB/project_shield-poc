@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using TeamTwo.Customer.Management.Services.Models;
 using TeamTwo.Customer.Management.Utilities;
 
 namespace TeamTwo.Customer.Management.Infrastructure
@@ -11,12 +12,12 @@ namespace TeamTwo.Customer.Management.Infrastructure
       _applicationSettingsService = applicationSettingsService;
     }
 
-    Task<object> ICustomerManagementStorageApiClient.GetCustomer(string tenantId)
+    Task<CustomerInfo> ICustomerManagementStorageApiClient.GetCustomerAsync(string tenantId)
     {
       throw new System.NotImplementedException();
     }
 
-    Task<object> ICustomerManagementStorageApiClient.StoreCustomer(string custonemerId)
+    Task<CustomerInfo> ICustomerManagementStorageApiClient.StoreCustomerAsync(CustomerInfo customer)
     {
       throw new System.NotImplementedException();
     }
