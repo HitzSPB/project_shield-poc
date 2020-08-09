@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -26,14 +27,17 @@ namespace TeamTwo.Customer.Management
         [HttpTrigger(AuthorizationLevel.Function, "get", Route = "customer/management/{customerid}")] HttpRequest req, string customerId,
         ILogger log)
     {
-      CustomerInfo customerInfo = await _customerManagementService.GetCustomerInformationAsync(customerId);
+      if(!Guid.TryParse(customerId, out Guid result))
+      {
+        return new BadRequestObjectResult("customerId was not correct format");
+      }
+      CustomerInfo customerInfo = await _customerManagementService.GetCustomerInformationAsync(result);
       return new OkObjectResult(customerInfo);
     }
 
     [FunctionName("StoreCustomer")]
     public async Task<IActionResult> StoreCustomerAsync(
-    [HttpTrigger(AuthorizationLevel.Function, "get", Route = "customer/management")] HttpRequest req, string customerId,
-    ILogger log)
+    [HttpTrigger(AuthorizationLevel.Function, "get", Route = "customer/management")] HttpRequest req)
     {
       var requestBody = await new StreamReader(req.Body).ReadToEndAsync();
       StoreCustomer storeCustomer = JsonConvert.DeserializeObject<StoreCustomer>(requestBody);

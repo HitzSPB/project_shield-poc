@@ -13,9 +13,8 @@ namespace TeamTwo.Customer.Management.Services
     {
       _customerManagementStorageApiClient = customerManagementStorageApiClient;
     }
-    async Task<CustomerInfo> ICustomerManagementService.GetCustomerInformationAsync(string customerId)
+    async Task<CustomerInfo> ICustomerManagementService.GetCustomerInformationAsync(Guid customerId)
     {
-      if (string.IsNullOrWhiteSpace(customerId)) throw new ArgumentNullException(nameof(customerId));
       return await _customerManagementStorageApiClient.GetCustomerAsync(customerId);
     }
 

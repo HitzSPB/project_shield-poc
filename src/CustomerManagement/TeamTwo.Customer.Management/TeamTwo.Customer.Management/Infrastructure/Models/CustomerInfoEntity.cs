@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.WindowsAzure.Storage.Table;
 using Newtonsoft.Json;
 
 namespace TeamTwo.Customer.Management.Infrastructure.Models
 {
-  public class CustomerInfoStorageDto
+  public class CustomerInfoEntity : TableEntity
   {
-    public CustomerInfoStorageDto()
-    { }
-    public CustomerInfoStorageDto(string customerId, Guid tenantId)
+    public CustomerInfoEntity(string customerId, Guid tenantId) : base(tenantId.ToString(), tenantId.ToString())
     {
       TenantId = tenantId;
       CustomerId = customerId;
