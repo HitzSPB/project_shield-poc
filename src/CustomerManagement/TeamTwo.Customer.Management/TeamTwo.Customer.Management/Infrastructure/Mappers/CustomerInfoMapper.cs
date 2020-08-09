@@ -9,13 +9,13 @@ namespace TeamTwo.Customer.Management.Infrastructure.Mappers
   public class CustomerInfoMapper : ICustomerInfoMapper
   {
 
-    CustomerInfo ICustomerInfoMapper.MapToCustomerInfo(CustomerInfoStorageDto customerInfoStorageDto)
+    CustomerInfo ICustomerInfoMapper.MapToCustomerInfo(CustomerInfoEntity customerInfoStorageEntity)
     {
-      return new CustomerInfo(customerInfoStorageDto.CustomerId, customerInfoStorageDto.TenantId);
+      return new CustomerInfo(customerInfoStorageEntity.CustomerId, customerInfoStorageEntity.TenantId);
     }
-    CustomerInfoStorageDto ICustomerInfoMapper.MapToCustomerInfoStorageDto(CustomerInfo customerInfo)
+    CustomerInfoEntity ICustomerInfoMapper.MapToCustomerInfoStorageDto(CustomerInfo customerInfo)
     {
-      return new CustomerInfoStorageDto(customerInfo.CustomerId, customerInfo.TenantId);
+      return new CustomerInfoEntity(customerInfo.CustomerId, customerInfo.TenantId);
     }
   }
 }

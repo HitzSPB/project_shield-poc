@@ -5,7 +5,7 @@ namespace TeamTwo.Customer.Management.Infrastructure.Mappers
 {
   public interface ICustomerInfoMapper
   {
-    CustomerInfo MapToCustomerInfo(CustomerInfoStorageDto customerInfoStorageDto);
-    CustomerInfoStorageDto MapToCustomerInfoStorageDto(CustomerInfo customerInfo);
+    CustomerInfo MapToCustomerInfo(CustomerInfoEntity customerInfoStorageEntity);
+    CustomerInfoEntity MapToCustomerInfoStorageDto(CustomerInfo customerInfo);
   }
 }
