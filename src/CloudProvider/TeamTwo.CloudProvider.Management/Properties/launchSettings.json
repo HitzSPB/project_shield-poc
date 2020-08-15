@@ -1,0 +1,17 @@
+{
+  "profiles": {
+    "TeamTwo.CloudProvider.Management": {
+      "commandName": "Project",
+      "commandLineArgs": "host start --port 7076",
+      "environmentVariables": {
+        "AZURE-MANAGEMENTAPI": "https://management.azure.com/",
+        "TEAMTWO-RSGNAME": "Relay",
+        "TEAMTWO-AAD_CLIENTSECRET": "-5v~vE4Cci4TveL98tSoP0kO~PVT.KZKp5",
+        "TEAMTWO-AAD_CLIENTID": "f9699ccd-ba0f-48fc-96c6-fcdb029a4519",
+        "TEAMTWO-SUBSCRIPTIONID": "76e8a755-61e2-4324-ac40-484b7ddb6d1f",
+        "TEAMTWO-AAD_TENANTID": "019e9eb0-dce2-481d-b771-01560ca31913",
+        "TEAMTWO-RELAY_NAMESPACE": "TeamTwoRelay"
+      }
+    }
+  }
+}

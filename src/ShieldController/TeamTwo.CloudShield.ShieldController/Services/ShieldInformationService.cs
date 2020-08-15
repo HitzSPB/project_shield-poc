@@ -20,12 +20,18 @@ namespace TeamTwo.CloudShield.ShieldController.Services
       _shieldApiClient = shieldApiClient;
     }
 
-    async Task<HybridConnection> IShieldInformationService.GetCustomerRelayConnection(string customerId)
+    async Task<Guid> IShieldInformationService.CreateCustomerAsync(string customerId)
     {
-      if (string.IsNullOrWhiteSpace(customerId)) throw new ArgumentException(nameof(customerId));
-      CustomerInformation customerInformation = await _customerManagementApiClient.GetCustomerInformationAsync(customerId);
+      if (string.IsNullOrWhiteSpace(customerId)) throw new ArgumentNullException(nameof(customerId));
+      return (await _customerManagementApiClient.CreateCustomerAsync(customerId)).TenantId;
+    }
+
+    async Task<HybridConnection> IShieldInformationService.GetCustomerRelayConnectionAsync(Guid tenantId)
+    {
+      if (tenantId == null) throw new ArgumentException(nameof(tenantId));
+      CustomerInformation customerInformation = await _customerManagementApiClient.GetCustomerInformationAsync(tenantId);
       if (customerInformation is null)
-        customerInformation = await _customerManagementApiClient.CreateCustomerAsync(customerId);
+        return null;
       HybridConnection customerRelayInformation = await _shieldApiClient.GetCustomerRelayAsync(customerInformation.TenantId);
       if (customerRelayInformation is null)
         return await _shieldApiClient.CreateCustomerRelayAsync(customerInformation.TenantId);

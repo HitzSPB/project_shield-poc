@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "TeamTwo.Customer.Management": {
+      "commandName": "Project",
+      "commandLineArgs": "host start --port 7074",
+      "environmentVariables": {
+        "TEAMTWO-AZURE_STORAGE_ACCOUNT_CONNECTION": "DefaultEndpointsProtocol=https;AccountName=relaycustomerstorage;AccountKey=BqnXhD0LY0KyKld85SDg9Qg5PYhQ9Lgg22wwscAWPhmRpBGRZDikPnp/Z7tRgh3YjlH3fxLqOVJkUay5DsN82g==;EndpointSuffix=core.windows.net"
+      }
+    }
+  }
+}

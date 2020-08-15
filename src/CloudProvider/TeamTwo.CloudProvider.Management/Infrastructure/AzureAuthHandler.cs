@@ -31,13 +31,13 @@ namespace TeamTwo.CloudProvider.Management.Infrastructure
 
     private async Task<Token> GetTokenAsync()
     {
-      var adTenantId = _applicationsSettings.GetProcessEnvironmentVariable("TEAMTWO-AAD_TENANTID");
+      var adTenantId = _applicationsSettings.AadTenantId;
       var loginUrl = new Uri($"https://login.microsoftonline.com/{adTenantId}/oauth2/token", UriKind.Absolute);
       var request = new HttpRequestMessage();
       var keyValues = new List<KeyValuePair<string, string>>();
       keyValues.Add(new KeyValuePair<string, string>("grant_type", "client_credentials"));
-      keyValues.Add(new KeyValuePair<string, string>("client_id", _applicationsSettings.GetProcessEnvironmentVariable("TEAMTWO-AAD_CLIENTID")));
-      keyValues.Add(new KeyValuePair<string, string>("client_secret", _applicationsSettings.GetProcessEnvironmentVariable("TEAMTWO-AAD_CLIENTSECRET")));
+      keyValues.Add(new KeyValuePair<string, string>("client_id", _applicationsSettings.AadClientId));
+      keyValues.Add(new KeyValuePair<string, string>("client_secret", _applicationsSettings.AadClientSecret));
       keyValues.Add(new KeyValuePair<string, string>("resource", "https://management.azure.com/"));
       request.Content = new FormUrlEncodedContent(keyValues);
       request.RequestUri = loginUrl;

@@ -4,9 +4,11 @@ namespace TeamTwo.Customer.Management.Utilities
 {
   public class ApplicationSettingsService : IApplicationSettingsService
   {
-    public string GetProccessEnvironmentVariable(string environmentVariableName)
+    private string GetProccessEnvironmentVariable(string environmentVariableName)
     {
       return Environment.GetEnvironmentVariable(environmentVariableName, EnvironmentVariableTarget.Process);
     }
+
+    string IApplicationSettingsService.AzureStorageAccountConnection => GetProccessEnvironmentVariable("TEAMTWO-AZURE_STORAGE_ACCOUNT_CONNECTION");
   }
 }

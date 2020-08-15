@@ -2,6 +2,6 @@
 {
   public interface IApplicationSettingsService
   {
-    string GetProccessEnvironmentVariable(string environmentVariableName);
+    string AzureStorageAccountConnection { get; }
   }
 }

@@ -17,23 +17,25 @@ namespace TeamTwo.CloudShield.ShieldController.Infrastructure
     {
       _applicationsSettingsService = applicationsSettingsService;
       _httpClient = httpClient;
+      if (_httpClient.BaseAddress == null)
+        _httpClient.BaseAddress = new Uri(_applicationsSettingsService.CustomerManagementUrl); // Should be set here as it cannot be done twice
     }
-    async Task<CustomerInformation> ICustomerManagementApiClient.GetCustomerInformationAsync(string customerId)
+    async Task<CustomerInformation> ICustomerManagementApiClient.GetCustomerInformationAsync(Guid tenantId)
     {
-      _httpClient.BaseAddress = new Uri(_applicationsSettingsService.CustomerManagementUrl);
-      HttpResponseMessage response = await _httpClient.GetAsync($"customer/management/{customerId}");
+      HttpResponseMessage response = await _httpClient.GetAsync($"api/customer/management/{tenantId}");
       if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
         return null;
       else
       {
+        response.EnsureSuccessStatusCode();
         var responseAsJson = await response.Content.ReadAsStringAsync();
         return JsonConvert.DeserializeObject<CustomerInformation>(responseAsJson);
       }
     }
     async Task<CustomerInformation> ICustomerManagementApiClient.CreateCustomerAsync(string customerId)
     {
-      _httpClient.BaseAddress = new Uri(_applicationsSettingsService.CustomerManagementUrl);
-      HttpResponseMessage response = await _httpClient.PostAsJsonAsync("customer/management", new CreateRelayRequestDto() { TenantId = customerId });
+      var customerRequestDto = JsonConvert.DeserializeObject(customerId);
+      HttpResponseMessage response = await _httpClient.PostAsJsonAsync("api/customer/management", customerRequestDto);
       if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
         return null;
       else

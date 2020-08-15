@@ -18,7 +18,7 @@ namespace TeamTwo.Customer.Management.Infrastructure
     {
       _applicationSettingsService = applicationSettingsService;
       _customerInfoMapper = customerInfoMapper;
-      _account = CloudStorageAccount.Parse(_applicationSettingsService.GetProccessEnvironmentVariable("AzureStorageAccountConnection"));
+      _account = CloudStorageAccount.Parse(_applicationSettingsService.AzureStorageAccountConnection);
     }
 
     async Task<CustomerInfo> ICustomerManagementStorageApiClient.GetCustomerAsync(Guid tenantId)

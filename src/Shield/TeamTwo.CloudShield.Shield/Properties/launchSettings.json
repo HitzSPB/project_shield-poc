@@ -2,7 +2,12 @@
   "profiles": {
     "TeamTwo.CloudShield.Shield": {
       "commandName": "Project",
-      "commandLineArgs": "host start --port 7073"
+      "commandLineArgs": "host start --port 7075",
+      "environmentVariables": {
+        "TEAMTWO-ACCOUNT_ENDPOINT": "https://relay-cosmos-db.documents.azure.com:443/",
+        "TEAMTWO-AUTH_KEY": "fIVhNYTrhyWWiv2jinJmJtphqqkIlUDt8xTcyUhDuqDcYlr8YHEfUGx87IAgPtycVtdiIaHD4Dfa2KhGVIb9RA==",
+        "TEAMTWO-CLOUD_PROVIDER_URL": "http://localhost:7076/api"
+      }
     }
   }
 }

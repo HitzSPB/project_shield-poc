@@ -4,9 +4,24 @@ namespace TeamTwo.CloudProvider.Management.Utilities
 {
   public class ApplicationSettingsService : IApplicationSettingsService
   {
-    string IApplicationSettingsService.GetProcessEnvironmentVariable(string environmentName)
+    private string GetProcessEnvironmentVariable(string environmentName)
     {
       return Environment.GetEnvironmentVariable(environmentName, EnvironmentVariableTarget.Process);
     }
+
+    string IApplicationSettingsService.AadTenantId => GetProcessEnvironmentVariable("TEAMTWO-AAD_TENANTID");
+
+    string IApplicationSettingsService.AadClientId => GetProcessEnvironmentVariable("TEAMTWO-AAD_CLIENTID");
+
+    string IApplicationSettingsService.AadClientSecret => GetProcessEnvironmentVariable("TEAMTWO-AAD_CLIENTSECRET");
+
+    string IApplicationSettingsService.AzureManagementApi => GetProcessEnvironmentVariable("AZURE-MANAGEMENTAPI");
+
+    string IApplicationSettingsService.AzureSubscriptionId => GetProcessEnvironmentVariable("TEAMTWO-SUBSCRIPTIONID");
+
+    string IApplicationSettingsService.ResourceGroupname => GetProcessEnvironmentVariable("TEAMTWO-RSGNAME");
+
+    string IApplicationSettingsService.RelayNameSpace => GetProcessEnvironmentVariable("TEAMTWO-RELAY_NAMESPACE");
+
   }
 }

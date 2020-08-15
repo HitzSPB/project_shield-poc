@@ -2,6 +2,9 @@
 {
   public interface IApplicationsSettingsService
   {
-    string GetProcessEnvironmentVariable(string environmentName);
+    // TEAMTWO-CLOUD_PROVIDER_URL
+    string CloudProviderUrl { get; }
+    string AccountEndPoint { get; }
+    string Authkey { get; }
   }
 }
