@@ -9,7 +9,7 @@ namespace TeamTwo.CloudShield.ShieldController.Utilities
       return Environment.GetEnvironmentVariable(environmentName, EnvironmentVariableTarget.Process);
     }
 
-    public string ShieldUrl => GetProcessEnvironmentVariable("ShieldManagementUrl");
-    public string CustomerManagementUrl => GetProcessEnvironmentVariable("CustomerManagementUrl");
+    public string ShieldUrl => GetProcessEnvironmentVariable("TEAMTWO-SHIELD_MANAGEMENT_URL");
+    public string CustomerManagementUrl => GetProcessEnvironmentVariable("TEAMTWO-CUSTOMER_MANAGEMENT_URL");
   }
 }

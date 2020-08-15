@@ -19,7 +19,7 @@ namespace TeamTwo.CloudProvider.Management.Infrastructure
     {
       _applicationsSettings = applicationsSettings;
       _httpClient = httpClient;
-      _httpClient.BaseAddress = new Uri(_applicationsSettings.GetProcessEnvironmentVariable("AZURE-MANAGEMENTAPI"), UriKind.Absolute);
+      _httpClient.BaseAddress = new Uri(_applicationsSettings.AzureManagementApi, UriKind.Absolute);
     }
     
     async Task<Uri> IRelayManagementApiClient.CreateHybridConnectionAsync(string tenantId)
@@ -27,9 +27,9 @@ namespace TeamTwo.CloudProvider.Management.Infrastructure
 
       //_httpClient.BaseAddress = new Uri(_applicationsSettings.GetProcessEnvironmentVariable("AZURE-MANAGEMENTAPI"), UriKind.Absolute);
 
-      var subscriptionId = _applicationsSettings.GetProcessEnvironmentVariable("TEAMTWO-SUBSCRIPTIONID");
-      var resourceGroupName = _applicationsSettings.GetProcessEnvironmentVariable("TEAMTWO-RSGNAME");
-      var relayNamespaceName = _applicationsSettings.GetProcessEnvironmentVariable("TEAMTWO-RELAY_NAMESPACE");
+      var subscriptionId = _applicationsSettings.AzureSubscriptionId;
+      var resourceGroupName = _applicationsSettings.ResourceGroupname;
+      var relayNamespaceName = _applicationsSettings.RelayNameSpace;
       var hybridConnectionName = $"{tenantId}Hybrid";
       var relativeUrl = new Uri($"subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{relayNamespaceName}/hybridConnections/{hybridConnectionName}?api-version=2017-04-01"
         , UriKind.Relative);
@@ -44,9 +44,9 @@ namespace TeamTwo.CloudProvider.Management.Infrastructure
 
     async Task<PolicyDto> IRelayManagementApiClient.CreatePolicykeyAsync(string tenantId, PolicyClaim policyClaim)
     {
-      var subscriptionId = _applicationsSettings.GetProcessEnvironmentVariable("TEAMTWO-SUBSCRIPTIONID");
-      var resourceGroupName = _applicationsSettings.GetProcessEnvironmentVariable("TEAMTWO-RSGNAME");
-      var relayNamespaceName = _applicationsSettings.GetProcessEnvironmentVariable("TEAMTWO-RELAY_NAMESPACE");
+      var subscriptionId = _applicationsSettings.AzureSubscriptionId;
+      var resourceGroupName = _applicationsSettings.ResourceGroupname;
+      var relayNamespaceName = _applicationsSettings.RelayNameSpace;
       var hybridConnectionName = $"{tenantId}Hybrid";
       var policyName = Guid.NewGuid().ToString();
       var relativeUrl = new Uri($"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{relayNamespaceName}/hybridConnections/{hybridConnectionName}/authorizationRules/{policyName}?api-version=2017-04-01", UriKind.Relative);
@@ -65,9 +65,9 @@ namespace TeamTwo.CloudProvider.Management.Infrastructure
 
     private async Task<string> GetPolicyKeyAsync(string hybridConnectionName, string policyName)
     {
-      var subscriptionId = _applicationsSettings.GetProcessEnvironmentVariable("TEAMTWO-SUBSCRIPTIONID");
-      var resourceGroupName = _applicationsSettings.GetProcessEnvironmentVariable("TEAMTWO-RSGNAME");
-      var relayNamespaceName = _applicationsSettings.GetProcessEnvironmentVariable("TEAMTWO-RELAY_NAMESPACE");
+      var subscriptionId = _applicationsSettings.AzureSubscriptionId;
+      var resourceGroupName = _applicationsSettings.ResourceGroupname;
+      var relayNamespaceName = _applicationsSettings.RelayNameSpace;
       var relativeUrl = new Uri($"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{relayNamespaceName}/hybridConnections/{hybridConnectionName}/authorizationRules/{policyName}/listKeys?api-version=2017-04-01", UriKind.Relative);
 
       var request = new HttpRequestMessage(HttpMethod.Post, relativeUrl);

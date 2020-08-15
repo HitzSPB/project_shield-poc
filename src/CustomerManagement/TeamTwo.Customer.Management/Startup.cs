@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using TeamTwo.Customer.Management;
 using TeamTwo.Customer.Management.Infrastructure;
+using TeamTwo.Customer.Management.Infrastructure.Mappers;
 using TeamTwo.Customer.Management.Services;
 using TeamTwo.Customer.Management.Utilities;
 
@@ -15,6 +16,7 @@ namespace TeamTwo.Customer.Management
       builder.Services.AddTransient<ICustomerManagementService, CustomerManagementService>();
       builder.Services.AddTransient<ICustomerManagementStorageApiClient, CustomerManagementStorageApiClient>();
       builder.Services.AddTransient<IApplicationSettingsService, ApplicationSettingsService>();
+      builder.Services.AddTransient<ICustomerInfoMapper, CustomerInfoMapper>();
     }
 
   }

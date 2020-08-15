@@ -22,7 +22,7 @@ namespace TeamTwo.CloudShield.Shield.Infrastructures
     }
     async Task<HybridConnectionDto> ICloudProviderHandlerApiClient.CreateRelayHybridConnection(string tenantId)
     {
-      _httpClient.BaseAddress = new Uri(_applicationsSettingsService.GetProcessEnvironmentVariable("TEAMTWO-CLOUD_PROVIDER_URL"), UriKind.Absolute);
+      _httpClient.BaseAddress = new Uri(_applicationsSettingsService.CloudProviderUrl, UriKind.Absolute);
       HttpResponseMessage response = await _httpClient.PostAsJsonAsync(new Uri("relay/hybridconnection", UriKind.Relative), new CloudProviderRequestBody(tenantId));
       response.EnsureSuccessStatusCode();
       var body = await response.Content.ReadAsStringAsync();

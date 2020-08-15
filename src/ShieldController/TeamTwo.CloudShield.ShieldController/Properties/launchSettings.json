@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "TeamTwo.CloudShield.ShieldController": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "TEAMTWO-CUSTOMER_MANAGEMENT_URL": "http://localhost:7074/",
+        "TEAMTWO-SHIELD_MANAGEMENT_URL": "http://localhost:7075/"
+      }
+    }
+  }
+}

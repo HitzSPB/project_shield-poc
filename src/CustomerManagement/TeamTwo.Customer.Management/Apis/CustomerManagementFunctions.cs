@@ -37,7 +37,7 @@ namespace TeamTwo.Customer.Management
 
     [FunctionName("StoreCustomer")]
     public async Task<IActionResult> StoreCustomerAsync(
-    [HttpTrigger(AuthorizationLevel.Function, "get", Route = "customer/management")] HttpRequest req)
+    [HttpTrigger(AuthorizationLevel.Function, "post", Route = "customer/management")] HttpRequest req)
     {
       var requestBody = await new StreamReader(req.Body).ReadToEndAsync();
       StoreCustomer storeCustomer = JsonConvert.DeserializeObject<StoreCustomer>(requestBody);

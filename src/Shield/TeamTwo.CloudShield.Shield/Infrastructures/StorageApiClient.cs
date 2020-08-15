@@ -19,8 +19,8 @@ namespace TeamTwo.CloudShield.Shield.Infrastructures
     {
       _applicationsSettings = applicationsSettings;
       _hybridConnectionDtoMapper = hybridConnectionDtoMapper;
-      _cosmosClient = new CosmosClient(_applicationsSettings.GetProcessEnvironmentVariable("TEAMTWO-ACCOUNT_ENDPOINT"),
-        _applicationsSettings.GetProcessEnvironmentVariable("TEAMTWO-AUTH_KEY"),
+      _cosmosClient = new CosmosClient(_applicationsSettings.AccountEndPoint,
+        _applicationsSettings.Authkey,
         new CosmosClientOptions { ConnectionMode = ConnectionMode.Gateway });
     }
 
