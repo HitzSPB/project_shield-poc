@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using TeamTwo.CloudShield.ShieldController.Infrastructure;
 using TeamTwo.CloudShield.ShieldController.Services.Models;
@@ -22,13 +20,17 @@ namespace TeamTwo.CloudShield.ShieldController.Services
       _shieldApiClient = shieldApiClient;
     }
 
-    async Task<object> IShieldInformationService.GetCustomerRelayConnection(string customerId)
+    async Task<HybridConnection> IShieldInformationService.GetCustomerRelayConnection(string customerId)
     {
       if (string.IsNullOrWhiteSpace(customerId)) throw new ArgumentException(nameof(customerId));
       CustomerInformation customerInformation = await _customerManagementApiClient.GetCustomerInformationAsync(customerId);
       if (customerInformation is null)
         customerInformation = await _customerManagementApiClient.CreateCustomerAsync(customerId);
-     object customerRelayInformation =  await _shieldApiClient.GetCustomerRelayAsync(customerInformation.TenantId);
+      HybridConnection customerRelayInformation = await _shieldApiClient.GetCustomerRelayAsync(customerInformation.TenantId);
+      if (customerRelayInformation is null)
+        return await _shieldApiClient.CreateCustomerRelayAsync(customerInformation.TenantId);
+      else
+        return customerRelayInformation;
     }
   }
 }
