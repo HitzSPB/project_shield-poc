@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using TeamTwo.CloudShield.ShieldController.Infrastructure.Models;
@@ -22,7 +20,7 @@ namespace TeamTwo.CloudShield.ShieldController.Infrastructure
     }
     async Task<CustomerInformation> ICustomerManagementApiClient.GetCustomerInformationAsync(string customerId)
     {
-      _httpClient.BaseAddress = new Uri(_applicationsSettingsService.GetProcessEnvironmentVariable("CustomerManagementUrl"));
+      _httpClient.BaseAddress = new Uri(_applicationsSettingsService.CustomerManagementUrl);
       HttpResponseMessage response = await _httpClient.GetAsync($"customer/management/{customerId}");
       if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
         return null;
@@ -34,8 +32,8 @@ namespace TeamTwo.CloudShield.ShieldController.Infrastructure
     }
     async Task<CustomerInformation> ICustomerManagementApiClient.CreateCustomerAsync(string customerId)
     {
-      _httpClient.BaseAddress = new Uri(_applicationsSettingsService.GetProcessEnvironmentVariable("CustomerManagementUrl"));
-      HttpResponseMessage response = await _httpClient.PostAsJsonAsync("customer/management", new CreateCustomerRequest(customerId));
+      _httpClient.BaseAddress = new Uri(_applicationsSettingsService.CustomerManagementUrl);
+      HttpResponseMessage response = await _httpClient.PostAsJsonAsync("customer/management", new CreateRelayRequestDto() { TenantId = customerId });
       if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
         return null;
       else

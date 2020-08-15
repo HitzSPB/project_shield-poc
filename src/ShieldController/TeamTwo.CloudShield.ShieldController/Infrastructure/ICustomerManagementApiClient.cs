@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using TeamTwo.CloudShield.ShieldController.Services.Models;
 
 namespace TeamTwo.CloudShield.ShieldController.Infrastructure

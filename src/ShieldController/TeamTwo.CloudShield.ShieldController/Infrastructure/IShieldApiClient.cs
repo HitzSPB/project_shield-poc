@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
+using TeamTwo.CloudShield.ShieldController.Services.Models;
 
 namespace TeamTwo.CloudShield.ShieldController.Infrastructure
 {
   public interface IShieldApiClient
   {
-    Task<object> GetCustomerRelayAsync(Guid tenantId);
-    Task<object> CreateCustomerRelayAsync(Guid tenantId);
+    Task<HybridConnection> GetCustomerRelayAsync(Guid tenantId);
+    Task<HybridConnection> CreateCustomerRelayAsync(Guid tenantId);
   }
 }

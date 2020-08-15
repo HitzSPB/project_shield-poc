@@ -2,6 +2,7 @@
 {
   public interface IApplicationSettingsService
   {
-    string GetProcessEnvironmentVariable(string environmentName);
+    string ShieldUrl { get; }
+    string CustomerManagementUrl { get; }
   }
 }
