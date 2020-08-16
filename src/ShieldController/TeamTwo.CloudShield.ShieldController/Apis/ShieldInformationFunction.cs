@@ -7,6 +7,7 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using TeamTwo.CloudShield.ShieldController.Apis.Models;
 using TeamTwo.CloudShield.ShieldController.Services;
 using TeamTwo.CloudShield.ShieldController.Services.Models;
 
@@ -48,7 +49,7 @@ namespace TeamTwo.CloudShield.ShieldController.Apis
       if(tenantId == null)
         return new BadRequestResult();
       else
-        return new OkObjectResult(tenantId);
+        return new OkObjectResult(new CustomerDetailsDto(tenantId));
 
     }
   }
