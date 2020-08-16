@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -7,6 +8,7 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using TeamTwo.CloudShield.Shield.Apis.Models;
 using TeamTwo.CloudShield.Shield.Service.Models;
 using TeamTwo.CloudShield.Shield.Services;
 using TeamTwo.CloudShield.Shield.Services.Models;
@@ -36,13 +38,21 @@ namespace TeamTwo.CloudShield.Shield.Apis
 
     [FunctionName("GetRelayListnerInformationAsync")]
     public async Task<IActionResult> GetRelayListnerInformationAsync([HttpTrigger(AuthorizationLevel.Function, "get",
-            Route = "relay-management/relayinfo/{RelayId}/listener")] HttpRequest req, string relayId, ILogger log)
+            Route = "relay-management/relayinfo/{relayId}/listener")] HttpRequest req, string relayId, ILogger log)
     {
       if (string.IsNullOrWhiteSpace(relayId)) throw new ArgumentNullException(nameof(relayId));
 
-      HybridConnectionDto response = await _relayManagementService.GetRelayAsync(relayId);
-      if (response != null)
-        return new OkObjectResult(response);
+      HybridConnectionDto hybridConnectionDto = await _relayManagementService.GetRelayAsync(relayId);
+      if (hybridConnectionDto != null)
+      {
+        var listenerDto = new ListenerDto()
+        {
+          HybridConnectionUrl = hybridConnectionDto.HybridConnectionUrl,
+          ListenerPolicyName = hybridConnectionDto.PolicyDtos.FirstOrDefault(x => x.PolicyType == PolicyClaim.Listen).PolicyName,
+          ListenerPolicyValue = hybridConnectionDto.PolicyDtos.FirstOrDefault(x => x.PolicyType == PolicyClaim.Listen).PolicyKey
+        };
+        return new OkObjectResult(listenerDto);
+      }
       else
         return new NotFoundResult();
     }
@@ -57,9 +67,17 @@ namespace TeamTwo.CloudShield.Shield.Apis
       CreateRelayStorageDto createRelayDto = JsonConvert.DeserializeObject<CreateRelayStorageDto>(requestBody);
       if (string.IsNullOrWhiteSpace(createRelayDto.TenantId)) throw new InvalidOperationException(nameof(createRelayDto));
 
-      HybridConnectionDto response = await _relayManagementService.StoreRelayAsync(JsonConvert.DeserializeObject<CreateRelayStorageDto>(requestBody));
-      if (response != null)
-        return new OkObjectResult(response);
+      HybridConnectionDto hybridConnectionDto = await _relayManagementService.StoreRelayAsync(JsonConvert.DeserializeObject<CreateRelayStorageDto>(requestBody));
+      if (hybridConnectionDto != null)
+      {
+        var listenerDto = new ListenerDto()
+        {
+          HybridConnectionUrl = hybridConnectionDto.HybridConnectionUrl,
+          ListenerPolicyName = hybridConnectionDto.PolicyDtos.FirstOrDefault(x => x.PolicyType == PolicyClaim.Listen).PolicyName,
+          ListenerPolicyValue = hybridConnectionDto.PolicyDtos.FirstOrDefault(x => x.PolicyType == PolicyClaim.Listen).PolicyKey
+        };
+        return new OkObjectResult(listenerDto);
+      }
       else
         return new BadRequestResult();
     }

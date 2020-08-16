@@ -8,6 +8,10 @@ namespace TeamTwo.Customer.Management.Infrastructure.Models
 {
   public class CustomerInfoEntity : TableEntity
   {
+    public CustomerInfoEntity()
+    {
+
+    }
     public CustomerInfoEntity(string customerId, Guid tenantId) : base(tenantId.ToString(), tenantId.ToString())
     {
       TenantId = tenantId;

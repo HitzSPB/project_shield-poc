@@ -18,6 +18,9 @@ namespace TeamTwo.CloudShield.ShieldController
       builder.Services.AddTransient<IShieldApiClient, ShieldApiClient>();
       builder.Services.AddTransient<IApplicationSettingsService, ApplicationSettingsService>();
       builder.Services.AddTransient<IHybridConnectionMapper, HybridConnectionMapper>();
+
+      builder.Services.AddHttpClient<IShieldApiClient, ShieldApiClient>();
+      builder.Services.AddHttpClient<ICustomerManagementApiClient, CustomerManagementApiClient>();
     }
 
   }

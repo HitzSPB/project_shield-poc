@@ -41,6 +41,8 @@ namespace TeamTwo.CloudShield.Shield.Infrastructures
       }
 
       //ItemResponse<HybridConnectionStorageDto> cosmosDbResponse = await container.ReadItemAsync<HybridConnectionStorageDto>(tenantId, new PartitionKey("/Connections"));
+      if (hybridConnectionStorageDtos.Count == 0)
+        return null;
       return _hybridConnectionDtoMapper.HybridConnectionDtoMap(hybridConnectionStorageDtos.FirstOrDefault(x => x.Id == tenantId));
     }
 

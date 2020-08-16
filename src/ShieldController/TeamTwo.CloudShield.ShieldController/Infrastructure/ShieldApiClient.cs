@@ -20,21 +20,23 @@ namespace TeamTwo.CloudShield.ShieldController.Infrastructure
       _applicationsSettingsService = applicationsSettingsService;
       _httpClient = httpClient;
       _hybridConnectionMapper = hybridConnectionMapper;
+      if(_httpClient.BaseAddress == null)
+        _httpClient.BaseAddress = new Uri(_applicationsSettingsService.ShieldUrl);
     }
     async Task<HybridConnection> IShieldApiClient.CreateCustomerRelayAsync(Guid tenantId)
     {
-      _httpClient.BaseAddress = new Uri(_applicationsSettingsService.ShieldUrl);
       var relayRequestDto = new CreateRelayRequestDto() { TenantId = tenantId.ToString() };
-      HttpResponseMessage response = await _httpClient.PostAsJsonAsync($"relay-management/relayinfo/{tenantId}/listener", relayRequestDto);
+      HttpResponseMessage response = await _httpClient.PostAsJsonAsync($"api/relay-management/", relayRequestDto);
       var body = await response.Content.ReadAsStringAsync();
       return JsonConvert.DeserializeObject<HybridConnection>(body);
     }
 
     async Task<HybridConnection> IShieldApiClient.GetCustomerRelayAsync(Guid tenantId)
     {
-      _httpClient.BaseAddress = new Uri(_applicationsSettingsService.ShieldUrl);
-      HttpResponseMessage response = await _httpClient.GetAsync($"relay-management/relayinfo/{tenantId}/listener");
+      HttpResponseMessage response = await _httpClient.GetAsync($"api/relay-management/relayinfo/{tenantId}/listener");
       var body = await response.Content.ReadAsStringAsync();
+      if (string.IsNullOrWhiteSpace(body))
+        return null;
       return _hybridConnectionMapper.MapToHybridConnection(JsonConvert.DeserializeObject<ListenerDto>(body));
     }
   }

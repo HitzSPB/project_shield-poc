@@ -43,6 +43,8 @@ namespace TeamTwo.Customer.Management
       StoreCustomer storeCustomer = JsonConvert.DeserializeObject<StoreCustomer>(requestBody);
 
       CustomerInfo customerInfo = await _customerManagementService.StoreCustomerInformationAsync(storeCustomer.customerId);
+      if (customerInfo is null)
+        return new BadRequestResult();
       return new OkObjectResult(customerInfo);
     }
   }
