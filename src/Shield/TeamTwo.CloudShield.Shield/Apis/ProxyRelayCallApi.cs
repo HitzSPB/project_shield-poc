@@ -25,7 +25,6 @@ namespace TeamTwo.CloudShield.Shield.Apis
     {
       if (!Guid.TryParse(tenantId, out Guid tenantIdGuid))
         return new BadRequestResult();
-      log.LogInformation("C# HTTP trigger function processed a request.");
       var requestBody = await new StreamReader(req.Body).ReadToEndAsync();
       string url = req.Query["url"];
       if (string.IsNullOrWhiteSpace(requestBody)) throw new ArgumentNullException(nameof(req.Body));
