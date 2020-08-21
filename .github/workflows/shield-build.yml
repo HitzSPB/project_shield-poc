@@ -32,12 +32,12 @@ jobs:
     - name: Dotnet Sonarscanner tool installation
       run: dotnet tool install --global dotnet-sonarscanner --version 4.10.0
     - name: Install dependencies
-      run: dotnet restore **/*.csproj
+      run: dotnet restore './src/TeamTwo.CloudShield.Shield/TeamTwo.CloudShield.Shield.sln'
     - name: Start SonarScanner for DotNet Core
       run: dotnet sonarscanner begin /d:sonar.host.url=https://sonarcloud.io /k:"HitzSPB_project_shield-poc" /o:"sonarcloud-hitzspb" /d:sonar.login=${{ secrets.SONAR_TOKEN }}
     - name: Build
-      run: dotnet build --configuration Release --no-restore **/*.csproj
+      run: dotnet build --configuration Release --no-restore './src/TeamTwo.CloudShield.Shield/TeamTwo.CloudShield.Shield.sln'
     - name: Test
-      run: dotnet test **/*Test.csproj --no-restore --verbosity normal
+      run: dotnet test './src/TeamTwo.CloudShield.Shield/TeamTwo.CloudShield.Shield.sln' --no-restore --verbosity normal
     - name: Stop SonarScanner for DotNet Core
       run: dotnet sonarscanner end /d:sonar.login=${{ secrets.SONAR_TOKEN }}
