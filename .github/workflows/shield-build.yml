@@ -23,19 +23,21 @@ jobs:
     - name: set environment variables
       uses: allenevans/set-env@v1.0.0
       with:
-        TEAMTWO_SHIELDSOURCE: './src/TeamTwo.CloudShield.Shield/TeamTwo.CloudShield.Shield.sln'    
-    - name: SonarCloud Scan
-      uses: SonarSource/sonarcloud-github-action@v1.3
-      env:
+        TEAMTWO_SHIELDSOURCE: './src/TeamTwo.CloudShield.Shield/TeamTwo.CloudShield.Shield.sln'
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.301
+    - name: Dotnet Sonarscanner tool installation
+      run: dotnet tool install --global dotnet-sonarscanner --version 4.10.0
     - name: Install dependencies
       run: dotnet restore $TEAMTWO_SHIELDSOURCE
+    - name: Start SonarScanner for DotNet Core
+      run: dotnet sonarscanner begin /d:sonar.host.url=https://sonarcloud.io /k:"HitzSPB_project_shield-poc" /o:"sonarcloud-hitzspb" /d:sonar.login=${{ secrets.SONAR_TOKEN }}
     - name: Build
       run: dotnet build --configuration Release --no-restore $TEAMTWO_SHIELDSOURCE 
     - name: Test
       run: dotnet test $TEAMTWO_SHIELDSOURCE --no-restore --verbosity normal
+    - name: Stop SonarScanner for DotNet Core
+      run: dotnet sonarscanner end /d:sonar.login=${{ secrets.SONAR_TOKEN }}
