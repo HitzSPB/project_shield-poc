@@ -22,9 +22,6 @@ namespace TeamTwo.CloudProvider.Management.Infrastructure
 
     async Task<Uri> IRelayManagementApiClient.CreateHybridConnectionAsync(string tenantId)
     {
-
-      //_httpClient.BaseAddress = new Uri(_applicationsSettings.GetProcessEnvironmentVariable("AZURE-MANAGEMENTAPI"), UriKind.Absolute);
-
       var subscriptionId = _applicationsSettings.AzureSubscriptionId;
       var resourceGroupName = _applicationsSettings.ResourceGroupname;
       var relayNamespaceName = _applicationsSettings.RelayNameSpace;
@@ -58,8 +55,6 @@ namespace TeamTwo.CloudProvider.Management.Infrastructure
       };
       HttpResponseMessage response = await _httpClient.SendAsync(httpRequestMessage);
       response.EnsureSuccessStatusCode();
-
-      var responsebody = await response.Content.ReadAsStringAsync();
 
       return new PolicyDto() { PolicyName = policyName, PolicyKey = await GetPolicyKeyAsync(hybridConnectionName, policyName), PolicyType = policyClaim };
 
