@@ -45,7 +45,7 @@ namespace TeamTwo.CloudShield.ShieldController.Apis
       var stream = new StreamReader(req.Body);
       var bodyContent = await stream.ReadToEndAsync();
       Guid tenantId = await _shieldInformationService.CreateCustomerAsync(bodyContent);
-      if (tenantId == null)
+      if (string.IsNullOrWhiteSpace(tenantId.ToString()))
         return new BadRequestResult();
       else
         return new OkObjectResult(new CustomerDetailsDto(tenantId));
