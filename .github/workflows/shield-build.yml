@@ -3,14 +3,12 @@ on:
   push:
     branches: [ master ] 
     paths:
-    - './src/TeamTwo.CloudShield.Shield.sln'
-    - './src/TeamTwo.CloudShield.Shield/*'
+    - './src*'
     - '.github/workflows/shield-build.yml'   
   pull_request:
     branches: [ master ]
     paths:
-    - './src/TeamTwo.CloudShield.Shield.sln'
-    - './src/TeamTwo.CloudShield.Shield/*'
+    - './src*'
     - '.github/workflows/shield-build.yml'   
 jobs:
   build:
