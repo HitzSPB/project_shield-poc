@@ -6,7 +6,6 @@ on:
     - './src*'
     - '.github/workflows/shield-build.yml'   
   pull_request:
-    branches: [ master ]
     paths:
     - './src*'
     - '.github/workflows/shield-build.yml'   
