@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ using TeamTwo.CloudProvider.Management.Utilities;
 
 namespace TeamTwo.CloudProvider.Management.Infrastructure
 {
+  [ExcludeFromCodeCoverage]
   public class AzureAuthHandler : DelegatingHandler
   {
     private readonly HttpClient _httpClient;
