@@ -23,7 +23,11 @@ jobs:
     - name: set environment variables
       uses: allenevans/set-env@v1.0.0
       with:
-        TEAMTWO_SHIELDSOURCE: './src/TeamTwo.CloudShield.Shield/TeamTwo.CloudShield.Shield.sln'
+        TEAMTWO_CLOUDPROVIDERSOURCE: './src/CloudProvider/TeamTwo.CloudProvider.Management.sln'
+        TEAMTWO_CUSTOMERMANAGEMENTSOURCE: './src/CustomerManagement/TeamTwo.Customer.Management.sln'
+        TEAMTWO_DEMOSERVERSOURCE: './src/DemoServer/TeamTwo.CloudShield.DemoServer.sln'
+        TEAMTWO_SHIELDSOURCE: './src/Shield/TeamTwo.CloudShield.Shield/TeamTwo.CloudShield.Shield.sln'
+        TEAMTWO_SHIELDCONTROLLERSOURCE: './src/ShieldController/TeamTwo.CloudShield.ShieldController.sln'
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
@@ -31,12 +35,28 @@ jobs:
         dotnet-version: 3.1.301
     - name: Dotnet Sonarscanner tool installation
       run: dotnet tool install --global dotnet-sonarscanner --version 4.10.0
-    - name: Install dependencies
+    - name: Install dependencies $TEAMTWO_CLOUDPROVIDERSOURCE
+      run: dotnet restore $TEAMTWO_CLOUDPROVIDERSOURCE
+    - name: Install dependencies $TEAMTWO_CUSTOMERMANAGEMENTSOURCE
+      run: dotnet restore $TEAMTWO_CUSTOMERMANAGEMENTSOURCE
+    - name: Install dependencies $TEAMTWO_DEMOSERVERSOURCE
+      run: dotnet restore $TEAMTWO_DEMOSERVERSOURCE
+    - name: Install dependencies $TEAMTWO_SHIELDSOURCE
       run: dotnet restore $TEAMTWO_SHIELDSOURCE
+    - name: Install dependencies $TEAMTWO_SHIELDCONTROLLERSOURCE
+      run: dotnet restore $TEAMTWO_SHIELDCONTROLLERSOURCE
     - name: Start SonarScanner for DotNet Core
       run: dotnet sonarscanner begin /d:sonar.host.url=https://sonarcloud.io /k:"HitzSPB_project_shield-poc" /o:"sonarcloud-hitzspb" /d:sonar.login=${{ secrets.SONAR_TOKEN }}
-    - name: Build
+    - name: Build $TEAMTWO_CLOUDPROVIDERSOURCE
+      run: dotnet build --configuration Release --no-restore $TEAMTWO_CLOUDPROVIDERSOURCE
+    - name: Build $TEAMTWO_CUSTOMERMANAGEMENTSOURCE
+      run: dotnet build --configuration Release --no-restore $TEAMTWO_CUSTOMERMANAGEMENTSOURCE
+    - name: Build $TEAMTWO_DEMOSERVERSOURCE
+      run: dotnet build --configuration Release --no-restore $TEAMTWO_DEMOSERVERSOURCE
+    - name: Build $TEAMTWO_SHIELDSOURCE
       run: dotnet build --configuration Release --no-restore $TEAMTWO_SHIELDSOURCE
+    - name: Build $TEAMTWO_SHIELDCONTROLLERSOURCE
+      run: dotnet build --configuration Release --no-restore $TEAMTWO_SHIELDCONTROLLERSOURCE
     - name: Test
       run: dotnet test $TEAMTWO_SHIELDSOURCE --no-restore --verbosity normal
     - name: Stop SonarScanner for DotNet Core
