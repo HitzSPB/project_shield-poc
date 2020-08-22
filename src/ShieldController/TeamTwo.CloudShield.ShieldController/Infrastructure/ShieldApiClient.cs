@@ -20,7 +20,7 @@ namespace TeamTwo.CloudShield.ShieldController.Infrastructure
       _applicationsSettingsService = applicationsSettingsService;
       _httpClient = httpClient;
       _hybridConnectionMapper = hybridConnectionMapper;
-      if(_httpClient.BaseAddress == null)
+      if (_httpClient.BaseAddress == null)
         _httpClient.BaseAddress = new Uri(_applicationsSettingsService.ShieldUrl);
     }
     async Task<HybridConnection> IShieldApiClient.CreateCustomerRelayAsync(Guid tenantId)

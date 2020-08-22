@@ -15,6 +15,6 @@ namespace TeamTwo.CloudShield.Shield.Utilities
       return Environment.GetEnvironmentVariable(environmentName, EnvironmentVariableTarget.Process);
     }
 
-    
+
   }
 }

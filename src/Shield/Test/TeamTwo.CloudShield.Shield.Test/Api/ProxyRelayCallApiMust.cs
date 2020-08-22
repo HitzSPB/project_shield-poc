@@ -26,8 +26,10 @@ namespace TeamTwo.CloudShield.Shield.Test
       IProxyRelayCallService proxyRelayCallService = A.Fake<IProxyRelayCallService>();
       ILogger log = A.Fake<ILogger>();
       A.CallTo(() => proxyRelayCallService.ProxyRelayCallAsync(null, null, null, null, null)).WithAnyArguments().Returns(new HttpResponseMessage()
-      { Content = new StringContent("Unit Test"),
-       StatusCode = HttpStatusCode.OK});
+      {
+        Content = new StringContent("Unit Test"),
+        StatusCode = HttpStatusCode.OK
+      });
       var sut = new ProxyRelayCallApi(proxyRelayCallService);
       var httpContext = new DefaultHttpContext();
       var httpRequest = new DefaultHttpRequest(httpContext)

@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Azure.Relay;
 using TeamTwo.CloudShield.Shield.Service.Models;
@@ -19,8 +17,10 @@ namespace TeamTwo.CloudShield.Shield.Infrastructures
     async Task<HttpResponseMessage> IRelayApiClient.RelayCallAsync(RelayCallDto relayCallDto)
     {
       await SetupHttpClientAsync(relayCallDto);
-      var request = new HttpRequestMessage(relayCallDto.HttpMethod, new Uri(relayCallDto.HybridConnection.HybridConnectionUrl, $"?url=relayCallDto.Url"));
-      request.Content = new StringContent(relayCallDto.BodyContent);
+      var request = new HttpRequestMessage(relayCallDto.HttpMethod, new Uri(relayCallDto.HybridConnection.HybridConnectionUrl, $"?url=relayCallDto.Url"))
+      {
+        Content = new StringContent(relayCallDto.BodyContent)
+      };
 
       HttpResponseMessage response = await _httpClient.SendAsync(request);
 

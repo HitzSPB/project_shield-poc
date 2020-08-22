@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -22,7 +20,7 @@ namespace TeamTwo.CloudProvider.Management.Infrastructure
       _httpClient = httpClient;
     }
 
-    protected async override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+    protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
     {
       Token token = await GetTokenAsync();
       request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", token.access_token);
@@ -34,11 +32,13 @@ namespace TeamTwo.CloudProvider.Management.Infrastructure
       var adTenantId = _applicationsSettings.AadTenantId;
       var loginUrl = new Uri($"https://login.microsoftonline.com/{adTenantId}/oauth2/token", UriKind.Absolute);
       var request = new HttpRequestMessage();
-      var keyValues = new List<KeyValuePair<string, string>>();
-      keyValues.Add(new KeyValuePair<string, string>("grant_type", "client_credentials"));
-      keyValues.Add(new KeyValuePair<string, string>("client_id", _applicationsSettings.AadClientId));
-      keyValues.Add(new KeyValuePair<string, string>("client_secret", _applicationsSettings.AadClientSecret));
-      keyValues.Add(new KeyValuePair<string, string>("resource", "https://management.azure.com/"));
+      var keyValues = new List<KeyValuePair<string, string>>
+      {
+        new KeyValuePair<string, string>("grant_type", "client_credentials"),
+        new KeyValuePair<string, string>("client_id", _applicationsSettings.AadClientId),
+        new KeyValuePair<string, string>("client_secret", _applicationsSettings.AadClientSecret),
+        new KeyValuePair<string, string>("resource", "https://management.azure.com/")
+      };
       request.Content = new FormUrlEncodedContent(keyValues);
       request.RequestUri = loginUrl;
       request.Method = new HttpMethod(HttpMethods.Get);

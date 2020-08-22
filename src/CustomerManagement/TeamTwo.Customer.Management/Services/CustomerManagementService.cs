@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using TeamTwo.Customer.Management.Infrastructure;
-using TeamTwo.Customer.Management.Infrastructure.Models;
 using TeamTwo.Customer.Management.Services.Models;
 
 namespace TeamTwo.Customer.Management.Services
