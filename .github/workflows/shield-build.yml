@@ -57,4 +57,3 @@ jobs:
       run: dotnet test $TEAMTWO_SHIELDSOURCE --no-restore --verbosity normal
     - name: Stop SonarScanner for DotNet Core
       run: dotnet sonarscanner end /d:sonar.login=${{ secrets.SONAR_TOKEN }}
-      
