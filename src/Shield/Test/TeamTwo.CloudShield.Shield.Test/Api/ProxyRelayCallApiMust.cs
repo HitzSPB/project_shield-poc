@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -35,7 +36,9 @@ namespace TeamTwo.CloudShield.Shield.Test
       var httpRequest = new DefaultHttpRequest(httpContext)
       {
         Body = new MemoryStream(Encoding.ASCII.GetBytes(JsonConvert.SerializeObject("test"))),
-        Method = "get"
+        Method = "get",
+        Query = new QueryCollection(new Dictionary<string, Microsoft.Extensions.Primitives.StringValues>()
+        { {"url", "/test" }  })
       };
       // Act
       IActionResult response = await sut.RelayCallAsync(httpRequest, Guid.NewGuid().ToString(), log);
@@ -71,7 +74,7 @@ namespace TeamTwo.CloudShield.Shield.Test
       var httpRequest = new DefaultHttpRequest(httpContext);
 
       // Act & Assert
-      await Assert.ThrowsAsync<ArgumentNullException>(() => sut.RelayCallAsync(httpRequest, Guid.NewGuid().ToString(), log));
+      await Assert.ThrowsAsync<InvalidOperationException>(() => sut.RelayCallAsync(httpRequest, Guid.NewGuid().ToString(), log));
     }
 
     [Fact]
@@ -91,7 +94,9 @@ namespace TeamTwo.CloudShield.Shield.Test
       var httpRequest = new DefaultHttpRequest(httpContext)
       {
         Body = new MemoryStream(Encoding.ASCII.GetBytes(JsonConvert.SerializeObject("test"))),
-        Method = "get"
+        Method = "get",
+        Query = new QueryCollection(new Dictionary<string, Microsoft.Extensions.Primitives.StringValues>()
+        { {"url", "/test" }  })
       };
       // Act
       IActionResult response = await sut.RelayCallAsync(httpRequest, Guid.NewGuid().ToString(), log);
