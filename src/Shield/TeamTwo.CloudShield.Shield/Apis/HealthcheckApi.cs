@@ -14,7 +14,7 @@ namespace TeamTwo.CloudShield.Shield.Apis
     public async Task<IActionResult> HealthCheckAsync([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = "healthcheck")]
         HttpRequest req, ILogger log)
     {
-      return new OkObjectResult(null);
+      return await Task.FromResult(new OkResult());
     }
   }
 }

@@ -11,14 +11,12 @@ namespace TeamTwo.Customer.Management.Infrastructure
 {
   public class CustomerManagementStorageApiClient : ICustomerManagementStorageApiClient
   {
-    private readonly IApplicationSettingsService _applicationSettingsService;
     private readonly ICustomerInfoMapper _customerInfoMapper;
     private readonly CloudStorageAccount _account;
     public CustomerManagementStorageApiClient(ICustomerInfoMapper customerInfoMapper, IApplicationSettingsService applicationSettingsService)
     {
-      _applicationSettingsService = applicationSettingsService;
       _customerInfoMapper = customerInfoMapper;
-      _account = CloudStorageAccount.Parse(_applicationSettingsService.AzureStorageAccountConnection);
+      _account = CloudStorageAccount.Parse(applicationSettingsService.AzureStorageAccountConnection);
     }
 
     async Task<CustomerInfo> ICustomerManagementStorageApiClient.GetCustomerAsync(Guid tenantId)

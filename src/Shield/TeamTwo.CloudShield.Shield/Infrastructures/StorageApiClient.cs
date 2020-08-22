@@ -11,16 +11,14 @@ namespace TeamTwo.CloudShield.Shield.Infrastructures
 {
   public class StorageApiClient : IStorageApiClient
   {
-    private readonly IApplicationsSettingsService _applicationsSettings;
     private readonly IHybridConnectionDtoMapper _hybridConnectionDtoMapper;
 
     private readonly CosmosClient _cosmosClient;
     public StorageApiClient(IApplicationsSettingsService applicationsSettings, IHybridConnectionDtoMapper hybridConnectionDtoMapper)
     {
-      _applicationsSettings = applicationsSettings;
       _hybridConnectionDtoMapper = hybridConnectionDtoMapper;
-      _cosmosClient = new CosmosClient(_applicationsSettings.AccountEndPoint,
-        _applicationsSettings.Authkey,
+      _cosmosClient = new CosmosClient(applicationsSettings.AccountEndPoint,
+        applicationsSettings.Authkey,
         new CosmosClientOptions { ConnectionMode = ConnectionMode.Gateway });
     }
 

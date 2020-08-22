@@ -9,15 +9,13 @@ namespace TeamTwo.CloudShield.ShieldController.Infrastructure
 {
   public class CustomerManagementApiClient : ICustomerManagementApiClient
   {
-    private readonly IApplicationSettingsService _applicationsSettingsService;
     private readonly HttpClient _httpClient;
 
     public CustomerManagementApiClient(IApplicationSettingsService applicationsSettingsService, HttpClient httpClient)
     {
-      _applicationsSettingsService = applicationsSettingsService;
       _httpClient = httpClient;
       if (_httpClient.BaseAddress == null)
-        _httpClient.BaseAddress = new Uri(_applicationsSettingsService.CustomerManagementUrl); // Should be set here as it cannot be done twice
+        _httpClient.BaseAddress = new Uri(applicationsSettingsService.CustomerManagementUrl); // Should be set here as it cannot be done twice
     }
     async Task<CustomerInformation> ICustomerManagementApiClient.GetCustomerInformationAsync(Guid tenantId)
     {

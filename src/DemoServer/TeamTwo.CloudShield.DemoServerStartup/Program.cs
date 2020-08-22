@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace TeamTwo.CloudShield.DemoServerStartup
 {
-  public class Program
+  public static class Program
   {
 #pragma warning disable IDE1006 // Naming Styles
     public static async Task Main(string[] args)
