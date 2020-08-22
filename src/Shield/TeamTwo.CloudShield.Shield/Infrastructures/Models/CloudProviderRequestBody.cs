@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TeamTwo.CloudShield.Shield.Infrastructures.Models
+﻿namespace TeamTwo.CloudShield.Shield.Infrastructures.Models
 {
   public class CloudProviderRequestBody
   {

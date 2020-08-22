@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
@@ -21,7 +19,7 @@ namespace TeamTwo.CloudProvider.Management.Infrastructure
       _httpClient = httpClient;
       _httpClient.BaseAddress = new Uri(_applicationsSettings.AzureManagementApi, UriKind.Absolute);
     }
-    
+
     async Task<Uri> IRelayManagementApiClient.CreateHybridConnectionAsync(string tenantId)
     {
 
@@ -33,10 +31,12 @@ namespace TeamTwo.CloudProvider.Management.Infrastructure
       var hybridConnectionName = $"{tenantId}Hybrid";
       var relativeUrl = new Uri($"subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{relayNamespaceName}/hybridConnections/{hybridConnectionName}?api-version=2017-04-01"
         , UriKind.Relative);
-      var httpRequestMessage = new HttpRequestMessage();
-      httpRequestMessage.Method = new HttpMethod(HttpMethods.Put);
-      httpRequestMessage.Content = new StringContent(JsonConvert.SerializeObject(new CreateHybridConnectionRequestBody(true)));
-      httpRequestMessage.RequestUri = relativeUrl;
+      var httpRequestMessage = new HttpRequestMessage
+      {
+        Method = new HttpMethod(HttpMethods.Put),
+        Content = new StringContent(JsonConvert.SerializeObject(new CreateHybridConnectionRequestBody(true))),
+        RequestUri = relativeUrl
+      };
       HttpResponseMessage response = await _httpClient.SendAsync(httpRequestMessage);
       response.EnsureSuccessStatusCode();
       return new Uri($"https://{relayNamespaceName}.servicebus.windows.net/{hybridConnectionName}", UriKind.Absolute);
@@ -50,10 +50,12 @@ namespace TeamTwo.CloudProvider.Management.Infrastructure
       var hybridConnectionName = $"{tenantId}Hybrid";
       var policyName = Guid.NewGuid().ToString();
       var relativeUrl = new Uri($"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{relayNamespaceName}/hybridConnections/{hybridConnectionName}/authorizationRules/{policyName}?api-version=2017-04-01", UriKind.Relative);
-      var httpRequestMessage = new HttpRequestMessage();
-      httpRequestMessage.Method = new HttpMethod(HttpMethods.Put);
-      httpRequestMessage.Content = new StringContent(JsonConvert.SerializeObject(new CreateHybridConnectionPolicyRequest(new string[] { policyClaim.ToString() })));
-      httpRequestMessage.RequestUri = relativeUrl;
+      var httpRequestMessage = new HttpRequestMessage
+      {
+        Method = new HttpMethod(HttpMethods.Put),
+        Content = new StringContent(JsonConvert.SerializeObject(new CreateHybridConnectionPolicyRequest(new string[] { policyClaim.ToString() }))),
+        RequestUri = relativeUrl
+      };
       HttpResponseMessage response = await _httpClient.SendAsync(httpRequestMessage);
       response.EnsureSuccessStatusCode();
 

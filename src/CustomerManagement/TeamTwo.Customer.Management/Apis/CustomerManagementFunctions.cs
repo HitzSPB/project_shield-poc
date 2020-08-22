@@ -8,7 +8,6 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using TeamTwo.Customer.Management.Apis.Models;
-using TeamTwo.Customer.Management.Infrastructure.Models;
 using TeamTwo.Customer.Management.Services;
 using TeamTwo.Customer.Management.Services.Models;
 
@@ -27,7 +26,7 @@ namespace TeamTwo.Customer.Management
         [HttpTrigger(AuthorizationLevel.Function, "get", Route = "customer/management/{customerid}")] HttpRequest req, string customerId,
         ILogger log)
     {
-      if(!Guid.TryParse(customerId, out Guid result))
+      if (!Guid.TryParse(customerId, out Guid result))
       {
         return new BadRequestObjectResult("customerId was not correct format");
       }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TeamTwo.CloudProvider.Management.Infrastructure.Models
+﻿namespace TeamTwo.CloudProvider.Management.Infrastructure.Models
 {
   public class Token
   {

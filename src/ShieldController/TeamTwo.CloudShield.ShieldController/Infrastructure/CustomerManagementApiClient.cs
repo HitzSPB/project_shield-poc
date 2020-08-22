@@ -2,7 +2,6 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using TeamTwo.CloudShield.ShieldController.Infrastructure.Models;
 using TeamTwo.CloudShield.ShieldController.Services.Models;
 using TeamTwo.CloudShield.ShieldController.Utilities;
 
