@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using FakeItEasy;
@@ -24,17 +25,21 @@ namespace TeamTwo.CloudShield.Shield.Test
       // Arrange
       IProxyRelayCallService proxyRelayCallService = A.Fake<IProxyRelayCallService>();
       ILogger log = A.Fake<ILogger>();
+      A.CallTo(() => proxyRelayCallService.ProxyRelayCallAsync(null, null, null, null, null)).WithAnyArguments().Returns(new HttpResponseMessage()
+      { Content = new StringContent("Unit Test"),
+       StatusCode = HttpStatusCode.OK});
       var sut = new ProxyRelayCallApi(proxyRelayCallService);
       var httpContext = new DefaultHttpContext();
       var httpRequest = new DefaultHttpRequest(httpContext)
       {
-        Body = new MemoryStream(Encoding.ASCII.GetBytes(JsonConvert.SerializeObject("test")))
+        Body = new MemoryStream(Encoding.ASCII.GetBytes(JsonConvert.SerializeObject("test"))),
+        Method = "get"
       };
       // Act
       IActionResult response = await sut.RelayCallAsync(httpRequest, Guid.NewGuid().ToString(), log);
 
       // Assert
-      Assert.Equal((int) HttpStatusCode.OK, ((StatusCodeResult) response).StatusCode);
+      Assert.Equal((int) HttpStatusCode.OK, ((ContentResult) response).StatusCode);
     }
     [Fact]
     [Trait("category", "unit")]
@@ -74,17 +79,23 @@ namespace TeamTwo.CloudShield.Shield.Test
       // Arrange
       IProxyRelayCallService proxyRelayCallService = A.Fake<IProxyRelayCallService>();
       ILogger log = A.Fake<ILogger>();
+      A.CallTo(() => proxyRelayCallService.ProxyRelayCallAsync(null, null, null, null, null)).WithAnyArguments().Returns(new HttpResponseMessage()
+      {
+        Content = new StringContent("Unit Test"),
+        StatusCode = HttpStatusCode.OK
+      });
       var sut = new ProxyRelayCallApi(proxyRelayCallService);
       var httpContext = new DefaultHttpContext();
       var httpRequest = new DefaultHttpRequest(httpContext)
       {
-        Body = new MemoryStream(Encoding.ASCII.GetBytes(JsonConvert.SerializeObject("test")))
+        Body = new MemoryStream(Encoding.ASCII.GetBytes(JsonConvert.SerializeObject("test"))),
+        Method = "get"
       };
       // Act
       IActionResult response = await sut.RelayCallAsync(httpRequest, Guid.NewGuid().ToString(), log);
 
       // Assert
-      Assert.Equal((int) HttpStatusCode.OK, ((StatusCodeResult) response).StatusCode);
+      Assert.Equal((int) HttpStatusCode.OK, ((ContentResult) response).StatusCode);
     }
   }
 }
