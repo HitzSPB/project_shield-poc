@@ -1,4 +1,5 @@
-﻿using Microsoft.Azure.Functions.Extensions.DependencyInjection;
+﻿using System.Diagnostics.CodeAnalysis;
+using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using TeamTwo.CloudProvider.Management;
 using TeamTwo.CloudProvider.Management.Infrastructure;
@@ -8,6 +9,7 @@ using TeamTwo.CloudProvider.Management.Utilities;
 [assembly: FunctionsStartup(typeof(Startup))]
 namespace TeamTwo.CloudProvider.Management
 {
+  [ExcludeFromCodeCoverage]
   internal class Startup : FunctionsStartup
   {
     public override void Configure(IFunctionsHostBuilder builder)

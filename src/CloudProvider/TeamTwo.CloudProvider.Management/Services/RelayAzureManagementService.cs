@@ -14,6 +14,8 @@ namespace TeamTwo.CloudProvider.Management.Services
     }
     async Task<HybridConnectionDto> IRelayAzureManagementService.CreateHybridConnection(CreateRelayDto createRelayStorageDto)
     {
+      if (createRelayStorageDto is null) throw new ArgumentNullException(nameof(createRelayStorageDto));
+
       Uri hybridConnectionUrl = await _relayManagementApiClient.CreateHybridConnectionAsync(createRelayStorageDto.TenantId);
       PolicyDto policySendKey = await _relayManagementApiClient.CreatePolicykeyAsync(createRelayStorageDto.TenantId, PolicyClaim.Send);
       PolicyDto policyListenKey = await _relayManagementApiClient.CreatePolicykeyAsync(createRelayStorageDto.TenantId, PolicyClaim.Listen);
