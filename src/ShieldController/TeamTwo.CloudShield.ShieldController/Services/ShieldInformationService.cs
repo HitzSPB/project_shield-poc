@@ -8,14 +8,11 @@ namespace TeamTwo.CloudShield.ShieldController.Services
 {
   public class ShieldInformationService : IShieldInformationService
   {
-    private readonly IApplicationSettingsService _applicationsSettingsService;
     private readonly ICustomerManagementApiClient _customerManagementApiClient;
     private readonly IShieldApiClient _shieldApiClient;
 
-    public ShieldInformationService(IApplicationSettingsService applicationsSettingsService, ICustomerManagementApiClient customerManagementApiClient,
-      IShieldApiClient shieldApiClient)
+    public ShieldInformationService(ICustomerManagementApiClient customerManagementApiClient, IShieldApiClient shieldApiClient)
     {
-      _applicationsSettingsService = applicationsSettingsService;
       _customerManagementApiClient = customerManagementApiClient;
       _shieldApiClient = shieldApiClient;
     }

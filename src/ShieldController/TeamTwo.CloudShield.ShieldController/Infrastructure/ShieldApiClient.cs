@@ -11,17 +11,15 @@ namespace TeamTwo.CloudShield.ShieldController.Infrastructure
 {
   public class ShieldApiClient : IShieldApiClient
   {
-    private readonly IApplicationSettingsService _applicationsSettingsService;
     private readonly HttpClient _httpClient;
     private readonly IHybridConnectionMapper _hybridConnectionMapper;
 
     public ShieldApiClient(IApplicationSettingsService applicationsSettingsService, HttpClient httpClient, IHybridConnectionMapper hybridConnectionMapper)
     {
-      _applicationsSettingsService = applicationsSettingsService;
       _httpClient = httpClient;
       _hybridConnectionMapper = hybridConnectionMapper;
       if (_httpClient.BaseAddress == null)
-        _httpClient.BaseAddress = new Uri(_applicationsSettingsService.ShieldUrl);
+        _httpClient.BaseAddress = new Uri(applicationsSettingsService.ShieldUrl);
     }
     async Task<HybridConnection> IShieldApiClient.CreateCustomerRelayAsync(Guid tenantId)
     {
