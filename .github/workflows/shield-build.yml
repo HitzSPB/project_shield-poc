@@ -1,7 +1,6 @@
 name: TeamTwo.CloudShield.Shield
 on:
   push:
-    branches: [ master ] 
     paths:
     - '/src/**'
     - '.github/workflows/shield-build.yml'   
