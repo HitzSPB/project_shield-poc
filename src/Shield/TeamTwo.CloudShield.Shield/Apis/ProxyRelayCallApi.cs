@@ -28,7 +28,7 @@ namespace TeamTwo.CloudShield.Shield.Apis
       var requestBody = await new StreamReader(req.Body).ReadToEndAsync();
       string url = req.Query["url"];
       if (string.IsNullOrWhiteSpace(requestBody)) throw new InvalidOperationException(nameof(requestBody));
-      if (string.IsNullOrWhiteSpace(url)) throw new ArgumentNullException(nameof(url));
+      if (string.IsNullOrWhiteSpace(url)) throw new InvalidOperationException(nameof(url));
       HttpResponseMessage response = await _proxyRelayCallService.ProxyRelayCallAsync(tenantId, requestBody, new HttpMethod(req.Method), req.Headers, url);
 
       return new ContentResult()

@@ -62,7 +62,7 @@ namespace TeamTwo.CloudShield.Shield.Apis
             Route = "relay-management/")] HttpRequest req, ILogger log)
     {
       var requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-      if (requestBody is null) throw new ArgumentNullException(nameof(requestBody));
+      if (requestBody is null) throw new InvalidOperationException(nameof(requestBody));
 
       CreateRelayStorageDto createRelayDto = JsonConvert.DeserializeObject<CreateRelayStorageDto>(requestBody);
       if (string.IsNullOrWhiteSpace(createRelayDto.TenantId)) throw new InvalidOperationException(nameof(createRelayDto));
