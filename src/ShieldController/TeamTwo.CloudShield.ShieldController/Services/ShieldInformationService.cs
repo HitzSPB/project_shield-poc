@@ -28,7 +28,7 @@ namespace TeamTwo.CloudShield.ShieldController.Services
 
     async Task<HybridConnection> IShieldInformationService.GetCustomerRelayConnectionAsync(Guid tenantId)
     {
-      if (tenantId == null) throw new ArgumentException(nameof(tenantId));
+      if (string.IsNullOrWhiteSpace(tenantId.ToString())) throw new ArgumentException(nameof(tenantId));
       CustomerInformation customerInformation = await _customerManagementApiClient.GetCustomerInformationAsync(tenantId);
       if (customerInformation is null)
         return null;
