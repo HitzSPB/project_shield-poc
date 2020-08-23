@@ -10,13 +10,13 @@ namespace TeamTwo.Customer.Management.Infrastructure.Models
     {
 
     }
-    public CustomerInfoEntity(string customerId, Guid tenantId) : base(tenantId.ToString(), tenantId.ToString())
+    public CustomerInfoEntity(Guid customerId, Guid tenantId) : base(tenantId.ToString(), tenantId.ToString())
     {
       TenantId = tenantId;
       CustomerId = customerId;
     }
     [JsonProperty("id")]
-    public string CustomerId { get; set; }
+    public Guid CustomerId { get; set; }
     public Guid TenantId { get; set; }
 
   }

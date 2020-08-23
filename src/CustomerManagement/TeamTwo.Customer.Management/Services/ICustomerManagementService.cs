@@ -7,6 +7,6 @@ namespace TeamTwo.Customer.Management.Services
   public interface ICustomerManagementService
   {
     Task<CustomerInfo> GetCustomerInformationAsync(Guid customerId);
-    Task<CustomerInfo> StoreCustomerInformationAsync(string customerId);
+    Task<CustomerInfo> StoreCustomerInformationAsync(Guid customerId);
   }
 }

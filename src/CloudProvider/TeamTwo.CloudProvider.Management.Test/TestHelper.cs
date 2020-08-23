@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using TeamTwo.CloudProvider.Management.Services.Models;
 
 namespace TeamTwo.CloudProvider.Management.Test

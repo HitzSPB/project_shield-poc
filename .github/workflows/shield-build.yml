@@ -2,11 +2,11 @@ name: TeamTwo.CloudShield.Shield
 on:
   push:
     paths:
-    - '/src/**'
+    - './src/**'
     - '.github/workflows/shield-build.yml'   
   pull_request:
     paths:
-    - '/src/**'
+    - './src/**'
     - '.github/workflows/shield-build.yml'   
 jobs:
   build:

@@ -6,12 +6,12 @@ namespace TeamTwo.Customer.Management.Services.Models
   {
     public CustomerInfo()
     { }
-    public CustomerInfo(string customerId, Guid tenantId)
+    public CustomerInfo(Guid customerId, Guid tenantId)
     {
       TenantId = tenantId;
       CustomerId = customerId;
     }
-    public string CustomerId { get; set; }
+    public Guid CustomerId { get; set; }
     public Guid TenantId { get; set; }
 
   }

@@ -21,8 +21,6 @@ namespace TeamTwo.Customer.Management.Infrastructure
 
     async Task<CustomerInfo> ICustomerManagementStorageApiClient.GetCustomerAsync(Guid tenantId)
     {
-
-
       CloudTable table = await SetupCloudTableAsync();
       var tableOperation = TableOperation.Retrieve<CustomerInfoEntity>(tenantId.ToString(), tenantId.ToString());
       TableResult tableOpreationResult = await table.ExecuteAsync(tableOperation);

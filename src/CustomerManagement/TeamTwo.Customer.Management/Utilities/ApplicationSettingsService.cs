@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace TeamTwo.Customer.Management.Utilities
 {
+  [ExcludeFromCodeCoverage]
   public class ApplicationSettingsService : IApplicationSettingsService
   {
     private string GetProccessEnvironmentVariable(string environmentVariableName)

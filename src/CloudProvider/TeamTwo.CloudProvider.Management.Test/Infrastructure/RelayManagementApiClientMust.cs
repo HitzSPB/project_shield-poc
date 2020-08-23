@@ -1,18 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using FakeItEasy;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Internal;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using TeamTwo.CloudProvider.Management.Infrastructure;
-using TeamTwo.CloudProvider.Management.Services;
 using TeamTwo.CloudProvider.Management.Services.Models;
 using TeamTwo.CloudProvider.Management.Test.Mocks;
 using TeamTwo.CloudProvider.Management.Utilities;
@@ -36,14 +26,14 @@ namespace TeamTwo.CloudProvider.Management.Test.Infrastructure
       A.CallTo(() => applicationSettingsService.ResourceGroupname).Returns("Relay_RG");
       A.CallTo(() => applicationSettingsService.RelayNameSpace).Returns(relayNameSpace);
 
-      IRelayManagementApiClient relayManagementApiClient = new RelayManagementApiClient(applicationSettingsService, new HttpClient(new RelayManagementClientHttpMock()));
+      IRelayManagementApiClient sut = new RelayManagementApiClient(applicationSettingsService, new HttpClient(new RelayManagementClientHttpMock()));
 
       // Act
-      Uri response = await relayManagementApiClient.CreateHybridConnectionAsync(TestHelper.TenantId);
+      Uri actual = await sut.CreateHybridConnectionAsync(TestHelper.TenantId);
 
       // Assert
-      Assert.Contains(TestHelper.TenantId, response.OriginalString);
-      Assert.Contains(relayNameSpace, response.OriginalString);
+      Assert.Contains(TestHelper.TenantId, actual.OriginalString);
+      Assert.Contains(relayNameSpace, actual.OriginalString);
     }
 
     [Fact]
@@ -58,10 +48,10 @@ namespace TeamTwo.CloudProvider.Management.Test.Infrastructure
       A.CallTo(() => applicationSettingsService.ResourceGroupname).Returns("Relay_RG");
       A.CallTo(() => applicationSettingsService.RelayNameSpace).Returns(relayNameSpace);
 
-      IRelayManagementApiClient relayManagementApiClient = new RelayManagementApiClient(applicationSettingsService, new HttpClient(new RelayManagementClientHttpMock()));
+      IRelayManagementApiClient sut = new RelayManagementApiClient(applicationSettingsService, new HttpClient(new RelayManagementClientHttpMock()));
 
       // Act & Assert
-      await Assert.ThrowsAsync<HttpRequestException>(() => relayManagementApiClient.CreateHybridConnectionAsync(TestHelper.TenantId));
+      await Assert.ThrowsAsync<HttpRequestException>(() => sut.CreateHybridConnectionAsync(TestHelper.TenantId));
     }
 
     [Fact]
@@ -80,9 +70,9 @@ namespace TeamTwo.CloudProvider.Management.Test.Infrastructure
       // Act & Assert
       try
       {
-      IRelayManagementApiClient relayManagementApiClient = new RelayManagementApiClient(applicationSettingsService, new HttpClient(new RelayManagementClientHttpMock()));
+        IRelayManagementApiClient sut = new RelayManagementApiClient(applicationSettingsService, new HttpClient(new RelayManagementClientHttpMock()));
       }
-      catch(UriFormatException exception)
+      catch (UriFormatException exception)
       {
         didCatchException = true;
         Assert.IsType<UriFormatException>(exception);
@@ -107,7 +97,7 @@ namespace TeamTwo.CloudProvider.Management.Test.Infrastructure
       // Act & Assert
       try
       {
-        IRelayManagementApiClient relayManagementApiClient = new RelayManagementApiClient(applicationSettingsService, new HttpClient(new RelayManagementClientHttpMock()));
+        IRelayManagementApiClient sut = new RelayManagementApiClient(applicationSettingsService, new HttpClient(new RelayManagementClientHttpMock()));
       }
       catch (InvalidOperationException exception)
       {
@@ -130,10 +120,10 @@ namespace TeamTwo.CloudProvider.Management.Test.Infrastructure
       A.CallTo(() => applicationSettingsService.ResourceGroupname).Returns("Relay_RG");
       A.CallTo(() => applicationSettingsService.RelayNameSpace).Returns(relayNameSpace);
 
-      IRelayManagementApiClient relayManagementApiClient = new RelayManagementApiClient(applicationSettingsService, new HttpClient(new RelayManagementClientHttpMock()));
+      IRelayManagementApiClient sut = new RelayManagementApiClient(applicationSettingsService, new HttpClient(new RelayManagementClientHttpMock()));
 
       // Act & Assert
-      await Assert.ThrowsAsync<InvalidOperationException>(() => relayManagementApiClient.CreateHybridConnectionAsync(TestHelper.TenantId));
+      await Assert.ThrowsAsync<InvalidOperationException>(() => sut.CreateHybridConnectionAsync(TestHelper.TenantId));
     }
 
     [Fact]
@@ -147,10 +137,10 @@ namespace TeamTwo.CloudProvider.Management.Test.Infrastructure
       A.CallTo(() => applicationSettingsService.AzureSubscriptionId).Returns("ffc1f3f6-a8ac-4d89-b485-02563edf182g");
       A.CallTo(() => applicationSettingsService.RelayNameSpace).Returns(relayNameSpace);
 
-      IRelayManagementApiClient relayManagementApiClient = new RelayManagementApiClient(applicationSettingsService, new HttpClient(new RelayManagementClientHttpMock()));
+      IRelayManagementApiClient sut = new RelayManagementApiClient(applicationSettingsService, new HttpClient(new RelayManagementClientHttpMock()));
 
       // Act & Assert
-      await Assert.ThrowsAsync<InvalidOperationException>(() => relayManagementApiClient.CreateHybridConnectionAsync(TestHelper.TenantId));
+      await Assert.ThrowsAsync<InvalidOperationException>(() => sut.CreateHybridConnectionAsync(TestHelper.TenantId));
     }
     [Fact]
     [Trait("Category", "UnitTest")]
@@ -162,10 +152,10 @@ namespace TeamTwo.CloudProvider.Management.Test.Infrastructure
       A.CallTo(() => applicationSettingsService.AzureSubscriptionId).Returns("ffc1f3f6-a8ac-4d89-b485-02563edf182g");
       A.CallTo(() => applicationSettingsService.ResourceGroupname).Returns("Relay_RG");
 
-      IRelayManagementApiClient relayManagementApiClient = new RelayManagementApiClient(applicationSettingsService, new HttpClient(new RelayManagementClientHttpMock()));
+      IRelayManagementApiClient sut = new RelayManagementApiClient(applicationSettingsService, new HttpClient(new RelayManagementClientHttpMock()));
 
       // Act & Assert
-      await Assert.ThrowsAsync<InvalidOperationException>(() => relayManagementApiClient.CreateHybridConnectionAsync(TestHelper.TenantId));
+      await Assert.ThrowsAsync<InvalidOperationException>(() => sut.CreateHybridConnectionAsync(TestHelper.TenantId));
     }
     [Fact]
     [Trait("Category", "UnitTest")]
@@ -179,10 +169,10 @@ namespace TeamTwo.CloudProvider.Management.Test.Infrastructure
       A.CallTo(() => applicationSettingsService.ResourceGroupname).Returns("Relay_RG");
       A.CallTo(() => applicationSettingsService.RelayNameSpace).Returns(relayNameSpace);
 
-      IRelayManagementApiClient relayManagementApiClient = new RelayManagementApiClient(applicationSettingsService, new HttpClient(new RelayManagementClientHttpMock()));
+      IRelayManagementApiClient sut = new RelayManagementApiClient(applicationSettingsService, new HttpClient(new RelayManagementClientHttpMock()));
 
       // Act & Assert
-      await Assert.ThrowsAsync<ArgumentNullException>(() => relayManagementApiClient.CreateHybridConnectionAsync(""));
+      await Assert.ThrowsAsync<ArgumentNullException>(() => sut.CreateHybridConnectionAsync(""));
     }
 
     #endregion
@@ -198,16 +188,16 @@ namespace TeamTwo.CloudProvider.Management.Test.Infrastructure
       A.CallTo(() => applicationSettingsService.ResourceGroupname).Returns("Relay_RG");
       A.CallTo(() => applicationSettingsService.RelayNameSpace).Returns(relayNameSpace);
 
-      IRelayManagementApiClient relayManagementApiClient = new RelayManagementApiClient(applicationSettingsService, new HttpClient(new RelayManagementClientHttpMock()));
+      IRelayManagementApiClient sut = new RelayManagementApiClient(applicationSettingsService, new HttpClient(new RelayManagementClientHttpMock()));
 
       // Act
-      PolicyDto response = await relayManagementApiClient.CreatePolicykeyAsync(TestHelper.TenantId, PolicyClaim.Listen);
+      PolicyDto actual = await sut.CreatePolicykeyAsync(TestHelper.TenantId, PolicyClaim.Listen);
 
       // Assert
-      Assert.NotNull(response);
-      Assert.Equal(TestHelper.PrimaryKey, response.PolicyKey);
-      Assert.True(Guid.TryParse(response.PolicyName, out Guid policyNameAsGuid));
-      Assert.Equal(PolicyClaim.Listen, response.PolicyType);
+      Assert.NotNull(actual);
+      Assert.Equal(TestHelper.PrimaryKey, actual.PolicyKey);
+      Assert.True(Guid.TryParse(actual.PolicyName, out Guid policyNameAsGuid));
+      Assert.Equal(PolicyClaim.Listen, actual.PolicyType);
     }
 
     [Fact]
@@ -222,10 +212,10 @@ namespace TeamTwo.CloudProvider.Management.Test.Infrastructure
       A.CallTo(() => applicationSettingsService.ResourceGroupname).Returns("Relay_RG");
       A.CallTo(() => applicationSettingsService.RelayNameSpace).Returns(relayNameSpace);
 
-      IRelayManagementApiClient relayManagementApiClient = new RelayManagementApiClient(applicationSettingsService, new HttpClient(new RelayManagementClientHttpMock()));
+      IRelayManagementApiClient sut = new RelayManagementApiClient(applicationSettingsService, new HttpClient(new RelayManagementClientHttpMock()));
 
       // Act & Assert
-      await Assert.ThrowsAsync<HttpRequestException>(() => relayManagementApiClient.CreatePolicykeyAsync(TestHelper.TenantId, PolicyClaim.Listen));
+      await Assert.ThrowsAsync<HttpRequestException>(() => sut.CreatePolicykeyAsync(TestHelper.TenantId, PolicyClaim.Listen));
     }
 
     [Fact]
@@ -239,10 +229,10 @@ namespace TeamTwo.CloudProvider.Management.Test.Infrastructure
       A.CallTo(() => applicationSettingsService.ResourceGroupname).Returns("Relay_RG");
       A.CallTo(() => applicationSettingsService.RelayNameSpace).Returns(relayNameSpace);
 
-      IRelayManagementApiClient relayManagementApiClient = new RelayManagementApiClient(applicationSettingsService, new HttpClient(new RelayManagementClientHttpMock()));
+      IRelayManagementApiClient sut = new RelayManagementApiClient(applicationSettingsService, new HttpClient(new RelayManagementClientHttpMock()));
 
       // Act & Assert
-      await Assert.ThrowsAsync<InvalidOperationException>(() => relayManagementApiClient.CreatePolicykeyAsync(TestHelper.TenantId, PolicyClaim.Listen));
+      await Assert.ThrowsAsync<InvalidOperationException>(() => sut.CreatePolicykeyAsync(TestHelper.TenantId, PolicyClaim.Listen));
     }
 
     [Fact]
@@ -256,10 +246,10 @@ namespace TeamTwo.CloudProvider.Management.Test.Infrastructure
       A.CallTo(() => applicationSettingsService.AzureSubscriptionId).Returns("ffc1f3f6-a8ac-4d89-b485-02563edf182g");
       A.CallTo(() => applicationSettingsService.RelayNameSpace).Returns(relayNameSpace);
 
-      IRelayManagementApiClient relayManagementApiClient = new RelayManagementApiClient(applicationSettingsService, new HttpClient(new RelayManagementClientHttpMock()));
+      IRelayManagementApiClient sut = new RelayManagementApiClient(applicationSettingsService, new HttpClient(new RelayManagementClientHttpMock()));
 
       // Act & Assert
-      await Assert.ThrowsAsync<InvalidOperationException>(() => relayManagementApiClient.CreatePolicykeyAsync(TestHelper.TenantId, PolicyClaim.Listen));
+      await Assert.ThrowsAsync<InvalidOperationException>(() => sut.CreatePolicykeyAsync(TestHelper.TenantId, PolicyClaim.Listen));
     }
     [Fact]
     [Trait("Category", "UnitTest")]
@@ -271,10 +261,10 @@ namespace TeamTwo.CloudProvider.Management.Test.Infrastructure
       A.CallTo(() => applicationSettingsService.AzureSubscriptionId).Returns("ffc1f3f6-a8ac-4d89-b485-02563edf182g");
       A.CallTo(() => applicationSettingsService.ResourceGroupname).Returns("Relay_RG");
 
-      IRelayManagementApiClient relayManagementApiClient = new RelayManagementApiClient(applicationSettingsService, new HttpClient(new RelayManagementClientHttpMock()));
+      IRelayManagementApiClient sut = new RelayManagementApiClient(applicationSettingsService, new HttpClient(new RelayManagementClientHttpMock()));
 
       // Act & Assert
-      await Assert.ThrowsAsync<InvalidOperationException>(() => relayManagementApiClient.CreatePolicykeyAsync(TestHelper.TenantId, PolicyClaim.Listen));
+      await Assert.ThrowsAsync<InvalidOperationException>(() => sut.CreatePolicykeyAsync(TestHelper.TenantId, PolicyClaim.Listen));
     }
     [Fact]
     [Trait("Category", "UnitTest")]
@@ -288,10 +278,10 @@ namespace TeamTwo.CloudProvider.Management.Test.Infrastructure
       A.CallTo(() => applicationSettingsService.ResourceGroupname).Returns("Relay_RG");
       A.CallTo(() => applicationSettingsService.RelayNameSpace).Returns(relayNameSpace);
 
-      IRelayManagementApiClient relayManagementApiClient = new RelayManagementApiClient(applicationSettingsService, new HttpClient(new RelayManagementClientHttpMock()));
+      IRelayManagementApiClient sut = new RelayManagementApiClient(applicationSettingsService, new HttpClient(new RelayManagementClientHttpMock()));
 
       // Act & Assert
-      await Assert.ThrowsAsync<ArgumentNullException>(() => relayManagementApiClient.CreatePolicykeyAsync("", PolicyClaim.Listen));
+      await Assert.ThrowsAsync<ArgumentNullException>(() => sut.CreatePolicykeyAsync("", PolicyClaim.Listen));
     }
   }
 }

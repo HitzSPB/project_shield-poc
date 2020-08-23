@@ -11,7 +11,7 @@ using TeamTwo.Customer.Management.Apis.Models;
 using TeamTwo.Customer.Management.Services;
 using TeamTwo.Customer.Management.Services.Models;
 
-namespace TeamTwo.Customer.Management
+namespace TeamTwo.Customer.Management.Apis
 {
   public class CustomerManagementFunctions
   {
@@ -27,9 +27,7 @@ namespace TeamTwo.Customer.Management
         ILogger log)
     {
       if (!Guid.TryParse(customerId, out Guid result))
-      {
         return new BadRequestObjectResult("customerId was not correct format");
-      }
       CustomerInfo customerInfo = await _customerManagementService.GetCustomerInformationAsync(result);
       return new OkObjectResult(customerInfo);
     }
@@ -39,6 +37,9 @@ namespace TeamTwo.Customer.Management
     [HttpTrigger(AuthorizationLevel.Function, "post", Route = "customer/management")] HttpRequest req)
     {
       var requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+      if (string.IsNullOrWhiteSpace(requestBody))
+        return new BadRequestResult();
+
       StoreCustomer storeCustomer = JsonConvert.DeserializeObject<StoreCustomer>(requestBody);
 
       CustomerInfo customerInfo = await _customerManagementService.StoreCustomerInformationAsync(storeCustomer.customerId);
