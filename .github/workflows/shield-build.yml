@@ -64,7 +64,7 @@ jobs:
     - name: Test $TEAMTWO_CLOUDPROVIDERSOURCE
       run: dotnet test $TEAMTWO_CLOUDPROVIDERSOURCE --no-restore --verbosity normal --collect "XPlat Code coverage"
     - name: Test $TEAMTWO_CUSTOMERMANAGEMENTSOURCE
-      run: dotnet test $TEAMTWO_CUSTOMERMANAGEMENTSOURCE --no-restore --verbosity normal --filter Category=UniTest --collect "XPlat Code coverage"
+      run: dotnet test $TEAMTWO_CUSTOMERMANAGEMENTSOURCE --no-restore --verbosity normal --filter Category=UnitTest --collect "XPlat Code coverage"
     - name: Test $TEAMTWO_DEMOSERVERSOURCE
       run: dotnet test $TEAMTWO_DEMOSERVERSOURCE --no-restore --verbosity normal --collect "XPlat Code coverage"
     - name: Test $TEAMTWO_SHIELDSOURCE
