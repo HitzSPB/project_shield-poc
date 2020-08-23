@@ -62,15 +62,15 @@ jobs:
       run: dotnet build --configuration Release --no-restore $TEAMTWO_SHIELDCONTROLLERSOURCE
 
     - name: Test $TEAMTWO_CLOUDPROVIDERSOURCE
-      run: dotnet test $TEAMTWO_CLOUDPROVIDERSOURCE --no-restore --verbosity normal --CollectCoverage=true --CoverletOutputFormat=opencover --CoverletOutput=coverage
+      run: dotnet test $TEAMTWO_CLOUDPROVIDERSOURCE --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=coverage
     - name: Test $TEAMTWO_CUSTOMERMANAGEMENTSOURCE
-      run: dotnet test $TEAMTWO_CUSTOMERMANAGEMENTSOURCE --no-restore --verbosity normal --CollectCoverage=true --CoverletOutputFormat=opencover --CoverletOutput=coverage
+      run: dotnet test $TEAMTWO_CUSTOMERMANAGEMENTSOURCE --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=coverage
     - name: Test $TEAMTWO_DEMOSERVERSOURCE
-      run: dotnet test $TEAMTWO_DEMOSERVERSOURCE --no-restore --verbosity normal --CollectCoverage=true --CoverletOutputFormat=opencover --CoverletOutput=coverage
+      run: dotnet test $TEAMTWO_DEMOSERVERSOURCE --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=coverage
     - name: Test $TEAMTWO_SHIELDSOURCE
-      run: dotnet test $TEAMTWO_SHIELDSOURCE --no-restore --verbosity normal --CollectCoverage=true --CoverletOutputFormat=opencover --CoverletOutput=coverage
+      run: dotnet test $TEAMTWO_SHIELDSOURCE --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=coverage
     - name: Test $TEAMTWO_SHIELDCONTROLLERSOURCE
-      run: dotnet test $TEAMTWO_SHIELDCONTROLLERSOURCE --no-restore --verbosity normal --CollectCoverage=true --CoverletOutputFormat=opencover --CoverletOutput=coverage
+      run: dotnet test $TEAMTWO_SHIELDCONTROLLERSOURCE --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=coverage
 
     - name: Stop SonarScanner for DotNet Core
       run: dotnet sonarscanner end /d:sonar.login=${{ secrets.SONAR_TOKEN }}
