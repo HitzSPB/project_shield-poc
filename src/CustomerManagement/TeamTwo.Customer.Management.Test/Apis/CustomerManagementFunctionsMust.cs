@@ -36,7 +36,7 @@ namespace TeamTwo.Customer.Management.Test
       IActionResult actual = await sut.GetCustomerAsync(httpRequest, TestHelper.CustomerId.ToString(), logger);
 
       // Assert
-      Assert.Equal(HttpStatusCode.OK, (HttpStatusCode) ((ObjectResult) response).StatusCode);
+      Assert.Equal(HttpStatusCode.OK, (HttpStatusCode) ((ObjectResult) actual).StatusCode);
       Assert.Equal(TestHelper.GetCustomerInfoWithTestHelperDefaultValues().CustomerId, ((CustomerInfo)((ObjectResult) actual).Value).CustomerId);
       Assert.Equal(TestHelper.GetCustomerInfoWithTestHelperDefaultValues().TenantId, ((CustomerInfo) ((ObjectResult) actual).Value).TenantId);
     }
@@ -77,7 +77,7 @@ namespace TeamTwo.Customer.Management.Test
       IActionResult actual = await sut.StoreCustomerAsync(httpRequest);
 
       // Assert
-      Assert.Equal(HttpStatusCode.OK, (HttpStatusCode) ((ObjectResult) response).StatusCode);
+      Assert.Equal(HttpStatusCode.OK, (HttpStatusCode) ((ObjectResult) actual).StatusCode);
       Assert.Equal(TestHelper.GetCustomerInfoWithTestHelperDefaultValues().CustomerId, ((CustomerInfo) ((ObjectResult) actual).Value).CustomerId);
       Assert.Equal(TestHelper.GetCustomerInfoWithTestHelperDefaultValues().TenantId, ((CustomerInfo) ((ObjectResult) actual).Value).TenantId);
     }
