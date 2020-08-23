@@ -21,6 +21,7 @@ namespace TeamTwo.Customer.Management.Test
   public class CustomerManagementFunctionsMust
   {
     [Fact]
+    [Trait("Category","UnitTest")]
     public async Task BeAbleToGetCustomerAsync()
     {
       // Arrange
@@ -42,6 +43,7 @@ namespace TeamTwo.Customer.Management.Test
     }
 
     [Fact]
+    [Trait("Category", "UnitTest")]
     public async Task GetBadRequestIfGetCustomerCallDoesNotContainValidGuidAsCustomerIdAsync()
     {
       // Arrange
@@ -59,6 +61,7 @@ namespace TeamTwo.Customer.Management.Test
     }
 
     [Fact]
+    [Trait("Category", "UnitTest")]
     public async Task BeAbleToStoreCustomerAsync()
     {
       // Arrange
@@ -83,6 +86,7 @@ namespace TeamTwo.Customer.Management.Test
     }
 
     [Fact]
+    [Trait("Category", "UnitTest")]
     public async Task BeGetBadRequestWhenStoreCustomerIsCalledWithoutBodyAsync()
     {
       // Arrange
@@ -102,6 +106,7 @@ namespace TeamTwo.Customer.Management.Test
     }
 
     [Fact]
+    [Trait("Category", "UnitTest")]
     public async Task ThrowsExceptionWhenBodyIsNotCorrectFormatAsync()
     {
       // Arrange
