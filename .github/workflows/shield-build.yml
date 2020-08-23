@@ -54,6 +54,6 @@ jobs:
     - name: Build $TEAMTWO_SHIELDCONTROLLERSOURCE
       run: dotnet build --configuration Release --no-restore $TEAMTWO_SHIELDCONTROLLERSOURCE
     - name: Test
-      run: dotnet test $TEAMTWO_SHIELDSOURCE --no-restore --verbosity normal
+      run: dotnet test $TEAMTWO_SHIELDSOURCE --no-restore --verbosity normal --collect "Code Coverage"
     - name: Stop SonarScanner for DotNet Core
       run: dotnet sonarscanner end /d:sonar.login=${{ secrets.SONAR_TOKEN }}
