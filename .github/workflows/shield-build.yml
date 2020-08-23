@@ -29,8 +29,10 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.301
+   
     - name: Dotnet Sonarscanner tool installation
       run: dotnet tool install --global dotnet-sonarscanner --version 4.10.0
+  
     - name: Install dependencies $TEAMTWO_CLOUDPROVIDERSOURCE
       run: dotnet restore $TEAMTWO_CLOUDPROVIDERSOURCE
     - name: Install dependencies $TEAMTWO_CUSTOMERMANAGEMENTSOURCE
@@ -41,8 +43,10 @@ jobs:
       run: dotnet restore $TEAMTWO_SHIELDSOURCE
     - name: Install dependencies $TEAMTWO_SHIELDCONTROLLERSOURCE
       run: dotnet restore $TEAMTWO_SHIELDCONTROLLERSOURCE
+
     - name: Start SonarScanner for DotNet Core
-      run: dotnet sonarscanner begin /d:sonar.host.url=https://sonarcloud.io /k:"HitzSPB_project_shield-poc" /o:"sonarcloud-hitzspb" /d:sonar.login=${{ secrets.SONAR_TOKEN }}
+      run: dotnet sonarscanner begin /d:sonar.host.url=https://sonarcloud.io /k:"HitzSPB_project_shield-poc" /o:"sonarcloud-hitzspb" /d:sonar.cs.opencover.reportsPaths="**/TestResults/**/coverage*.xml" /d:sonar.coverage.exclusions="**Must*.cs" /d:sonar.login=${{ secrets.SONAR_TOKEN }}
+
     - name: Build $TEAMTWO_CLOUDPROVIDERSOURCE
       run: dotnet build --configuration Release --no-restore $TEAMTWO_CLOUDPROVIDERSOURCE
     - name: Build $TEAMTWO_CUSTOMERMANAGEMENTSOURCE
@@ -53,7 +57,18 @@ jobs:
       run: dotnet build --configuration Release --no-restore $TEAMTWO_SHIELDSOURCE
     - name: Build $TEAMTWO_SHIELDCONTROLLERSOURCE
       run: dotnet build --configuration Release --no-restore $TEAMTWO_SHIELDCONTROLLERSOURCE
-    - name: Test
-      run: dotnet test $TEAMTWO_SHIELDSOURCE --no-restore --verbosity normal --collect "XPlat Code Coverage"
+
+    - name: Test $TEAMTWO_CLOUDPROVIDERSOURCE
+      run: dotnet test $TEAMTWO_CLOUDPROVIDERSOURCE --no-restore --verbosity normal --collect "XPlat Code Coverage"
+    - name: Test $TEAMTWO_CUSTOMERMANAGEMENTSOURCE
+      run: dotnet test $TEAMTWO_CUSTOMERMANAGEMENTSOURCE --no-restore --verbosity normal --collect "XPlat Code Coverage"
+    - name: Test $TEAMTWO_DEMOSERVERSOURCE
+      run: dotnet test $TEAMTWO_DEMOSERVERSOURCE --no-restore --verbosity normal --collect "XPlat Code Coverage"
+    - name: Test $TEAMTWO_SHIELDSOURCE
+      run: dotnet test $TEAMTWO_SHIELDSOURCE --no-restore --verbosity normal --collect "XPlat Code Coverage"  
+    - name: Test $TEAMTWO_SHIELDCONTROLLERSOURCE
+      run: dotnet test $TEAMTWO_SHIELDCONTROLLERSOURCE --no-restore --verbosity normal --collect "XPlat Code Coverage"  
+
+
     - name: Stop SonarScanner for DotNet Core
       run: dotnet sonarscanner end /d:sonar.login=${{ secrets.SONAR_TOKEN }}
