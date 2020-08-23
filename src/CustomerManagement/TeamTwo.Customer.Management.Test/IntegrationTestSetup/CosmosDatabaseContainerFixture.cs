@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -77,7 +75,7 @@ namespace TeamTwo.Customer.Management.Test.IntegrationTestSetup
       const int waitTime = 5500;
       const int attempts = 70;
 
-      for (int i = 1; i < attempts; i++)
+      for (var i = 1; i < attempts; i++)
       {
         if (File.Exists(filePath))
         {
@@ -149,7 +147,7 @@ Command: {command}");
       }
       catch
       {
-        if(throwException)
+        if (throwException)
         {
           throw;
         }

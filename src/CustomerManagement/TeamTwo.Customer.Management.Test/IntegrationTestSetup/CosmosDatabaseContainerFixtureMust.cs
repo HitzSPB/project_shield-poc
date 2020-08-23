@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xunit;
+﻿using Xunit;
 
 namespace TeamTwo.Customer.Management.Test.IntegrationTestSetup
 {
@@ -16,7 +13,7 @@ namespace TeamTwo.Customer.Management.Test.IntegrationTestSetup
     }
 
     [Fact]
-    [Trait("Category","Integration")]
+    [Trait("Category", "Integration")]
     [Trait("Category", "Container")]
     public void SetupValidDatabaseAccess()
     {

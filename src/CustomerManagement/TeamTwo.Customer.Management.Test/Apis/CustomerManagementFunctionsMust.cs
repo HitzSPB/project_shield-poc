@@ -1,7 +1,5 @@
-using System;
 using System.IO;
 using System.Net;
-using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using FakeItEasy;
@@ -11,7 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using TeamTwo.Customer.Management.Apis;
-using TeamTwo.Customer.Management.Apis.Models;
 using TeamTwo.Customer.Management.Services;
 using TeamTwo.Customer.Management.Services.Models;
 using Xunit;
@@ -21,7 +18,7 @@ namespace TeamTwo.Customer.Management.Test
   public class CustomerManagementFunctionsMust
   {
     [Fact]
-    [Trait("Category","UnitTest")]
+    [Trait("Category", "UnitTest")]
     public async Task BeAbleToGetCustomerAsync()
     {
       // Arrange
@@ -38,7 +35,7 @@ namespace TeamTwo.Customer.Management.Test
 
       // Assert
       Assert.Equal(HttpStatusCode.OK, (HttpStatusCode) ((ObjectResult) actual).StatusCode);
-      Assert.Equal(TestHelper.GetCustomerInfoWithTestHelperDefaultValues().CustomerId, ((CustomerInfo)((ObjectResult) actual).Value).CustomerId);
+      Assert.Equal(TestHelper.GetCustomerInfoWithTestHelperDefaultValues().CustomerId, ((CustomerInfo) ((ObjectResult) actual).Value).CustomerId);
       Assert.Equal(TestHelper.GetCustomerInfoWithTestHelperDefaultValues().TenantId, ((CustomerInfo) ((ObjectResult) actual).Value).TenantId);
     }
 

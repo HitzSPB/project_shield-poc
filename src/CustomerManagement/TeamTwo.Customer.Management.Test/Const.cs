@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TeamTwo.Customer.Management.Test
+﻿namespace TeamTwo.Customer.Management.Test
 {
   internal class Const
   {

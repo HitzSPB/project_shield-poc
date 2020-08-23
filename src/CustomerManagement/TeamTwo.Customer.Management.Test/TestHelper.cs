@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using TeamTwo.Customer.Management.Apis.Models;
 using TeamTwo.Customer.Management.Services.Models;
 
