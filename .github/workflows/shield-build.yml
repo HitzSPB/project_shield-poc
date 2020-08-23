@@ -45,7 +45,7 @@ jobs:
       run: dotnet restore $TEAMTWO_SHIELDCONTROLLERSOURCE
 
     - name: Start SonarScanner for DotNet Core
-      run: dotnet sonarscanner begin /d:sonar.host.url=https://sonarcloud.io /k:"HitzSPB_project_shield-poc" /o:"sonarcloud-hitzspb" /d:sonar.cs.opencover.reportsPaths="**/TestResults/**/coverage*.xml" /d:sonar.coverage.exclusions="**Must*.cs" /d:sonar.login=${{ secrets.SONAR_TOKEN }}
+      run: dotnet sonarscanner begin /d:sonar.host.url=https://sonarcloud.io /k:"HitzSPB_project_shield-poc" /o:"sonarcloud-hitzspb" /d:sonar.cs.opencover.reportsPaths="Cover.Tests\TestResults\*\coverage.opencover.xml" /d:sonar.cs.vstest.reportsPaths="Cover.Tests\TestResults\*.trx" /d:sonar.coverage.exclusions="**Must*.cs" /d:sonar.login=${{ secrets.SONAR_TOKEN }}
 
     - name: Build $TEAMTWO_CLOUDPROVIDERSOURCE
       run: dotnet build --configuration Release --no-restore $TEAMTWO_CLOUDPROVIDERSOURCE
@@ -59,15 +59,15 @@ jobs:
       run: dotnet build --configuration Release --no-restore $TEAMTWO_SHIELDCONTROLLERSOURCE
 
     - name: Test $TEAMTWO_CLOUDPROVIDERSOURCE
-      run: dotnet test $TEAMTWO_CLOUDPROVIDERSOURCE --no-restore --verbosity normal --collect "XPlat Code Coverage"
+      run: dotnet test $TEAMTWO_CLOUDPROVIDERSOURCE --no-restore --verbosity normal --logger trx --settings build/coverlet.runsettings
     - name: Test $TEAMTWO_CUSTOMERMANAGEMENTSOURCE
-      run: dotnet test $TEAMTWO_CUSTOMERMANAGEMENTSOURCE --no-restore --verbosity normal --collect "XPlat Code Coverage"
+      run: dotnet test $TEAMTWO_CUSTOMERMANAGEMENTSOURCE --no-restore --verbosity normal --logger trx --settings build/coverlet.runsettings
     - name: Test $TEAMTWO_DEMOSERVERSOURCE
-      run: dotnet test $TEAMTWO_DEMOSERVERSOURCE --no-restore --verbosity normal --collect "XPlat Code Coverage"
+      run: dotnet test $TEAMTWO_DEMOSERVERSOURCE --no-restore --verbosity normal --logger trx --settings build/coverlet.runsettings
     - name: Test $TEAMTWO_SHIELDSOURCE
-      run: dotnet test $TEAMTWO_SHIELDSOURCE --no-restore --verbosity normal --collect "XPlat Code Coverage"  
+      run: dotnet test $TEAMTWO_SHIELDSOURCE --no-restore --verbosity normal --logger trx --settings build/coverlet.runsettings 
     - name: Test $TEAMTWO_SHIELDCONTROLLERSOURCE
-      run: dotnet test $TEAMTWO_SHIELDCONTROLLERSOURCE --no-restore --verbosity normal --collect "XPlat Code Coverage"  
+      run: dotnet test $TEAMTWO_SHIELDCONTROLLERSOURCE --no-restore --verbosity normal --logger trx --settings build/coverlet.runsettings
 
 
     - name: Stop SonarScanner for DotNet Core
