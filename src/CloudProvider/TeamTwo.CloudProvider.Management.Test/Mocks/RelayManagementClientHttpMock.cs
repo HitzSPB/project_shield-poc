@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using TeamTwo.CloudProvider.Management.Infrastructure.Models;
 
@@ -18,11 +15,11 @@ namespace TeamTwo.CloudProvider.Management.Test.Mocks
     {
       var response = new HttpResponseMessage();
       var split = httpRequest.RequestUri.AbsolutePath.Split("/");
-      if(httpRequest.RequestUri.OriginalString.Contains(TestHelper.GetDefaultLocalHostUri.ToString()))
+      if (httpRequest.RequestUri.OriginalString.Contains(TestHelper.GetDefaultLocalHostUri.ToString()))
       {
-        if(split.Contains("hybridConnections"))
+        if (split.Contains("hybridConnections"))
         {
-          if(split.Contains("authorizationRules") && httpRequest.Method == HttpMethod.Post)
+          if (split.Contains("authorizationRules") && httpRequest.Method == HttpMethod.Post)
           {
             response.StatusCode = HttpStatusCode.OK;
             response.Content = new StringContent(JsonConvert.SerializeObject(new GetPolicyKeysResponse()
@@ -36,7 +33,7 @@ namespace TeamTwo.CloudProvider.Management.Test.Mocks
           {
             CreateHybridConnectionRequestBody result = JsonConvert.DeserializeObject<CreateHybridConnectionRequestBody>
               (await httpRequest.Content.ReadAsStringAsync());
-            if(result.Properties.RequiresClientAuthorization == true)
+            if (result.Properties.RequiresClientAuthorization == true)
             {
               response.StatusCode = HttpStatusCode.OK;
             }

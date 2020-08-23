@@ -1,7 +1,9 @@
-﻿namespace TeamTwo.Customer.Management.Apis.Models
+﻿using System;
+
+namespace TeamTwo.Customer.Management.Apis.Models
 {
   public class StoreCustomer
   {
-    public string customerId { get; set; }
+    public Guid customerId { get; set; }
   }
 }

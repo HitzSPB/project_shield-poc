@@ -1,8 +1,5 @@
-using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using FakeItEasy;
@@ -26,13 +23,13 @@ namespace TeamTwo.CloudProvider.Management.Test.Apis
       // Arrange
       IRelayAzureManagementService relayAzureManagementService = A.Fake<IRelayAzureManagementService>();
       ILogger logger = A.Fake<ILogger>();
-      var relayHybridConnectionApi = new RelayHybridConnectionApi(relayAzureManagementService);
+      var sut = new RelayHybridConnectionApi(relayAzureManagementService);
       var httpContext = new DefaultHttpContext();
-      var createRelayStorageDto = new CreateRelayDto() {  TenantId = TestHelper.TenantId };
+      var createRelayStorageDto = new CreateRelayDto() { TenantId = TestHelper.TenantId };
       var httpRequest = new DefaultHttpRequest(httpContext)
       { Body = new MemoryStream(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(createRelayStorageDto))) };
-      var hybridConnectionDto = new HybridConnectionDto(TestHelper.GetDefaultLocalHostUri, new PolicyDto[2] 
-      { 
+      var hybridConnectionDto = new HybridConnectionDto(TestHelper.GetDefaultLocalHostUri, new PolicyDto[2]
+      {
         TestHelper.GetListenPolicyDto(),
         TestHelper.GetSendPolicyDto()
       });
@@ -40,11 +37,11 @@ namespace TeamTwo.CloudProvider.Management.Test.Apis
       A.CallTo(() => relayAzureManagementService.CreateHybridConnection(createRelayStorageDto)).WithAnyArguments().Returns(hybridConnectionDto);
 
       // Act
-      IActionResult response = await relayHybridConnectionApi.CreateRelayHybridConnectionAsync(httpRequest, logger);
+      IActionResult actual = await sut.CreateRelayHybridConnectionAsync(httpRequest, logger);
 
       // Assert
-      Assert.Equal(HttpStatusCode.OK, (HttpStatusCode)((ObjectResult) response).StatusCode);
-      Assert.Equal(hybridConnectionDto, (HybridConnectionDto)((ObjectResult) response).Value);
+      Assert.Equal(HttpStatusCode.OK, (HttpStatusCode) ((ObjectResult) actual).StatusCode);
+      Assert.Equal(hybridConnectionDto, (HybridConnectionDto) ((ObjectResult) actual).Value);
     }
 
     [Fact]
@@ -54,16 +51,16 @@ namespace TeamTwo.CloudProvider.Management.Test.Apis
       // Arrange
       IRelayAzureManagementService relayAzureManagementService = A.Fake<IRelayAzureManagementService>();
       ILogger logger = A.Fake<ILogger>();
-      var relayHybridConnectionApi = new RelayHybridConnectionApi(relayAzureManagementService);
+      var sut = new RelayHybridConnectionApi(relayAzureManagementService);
       var httpContext = new DefaultHttpContext();
       var httpRequest = new DefaultHttpRequest(httpContext);
       A.CallTo(() => relayAzureManagementService.CreateHybridConnection(null)).Returns<HybridConnectionDto>(null);
 
       // Act
-      IActionResult response = await relayHybridConnectionApi.CreateRelayHybridConnectionAsync(httpRequest, logger);
+      IActionResult actual = await sut.CreateRelayHybridConnectionAsync(httpRequest, logger);
 
       // Assert
-      Assert.Equal(HttpStatusCode.BadRequest, (HttpStatusCode) ((StatusCodeResult) response).StatusCode);
+      Assert.Equal(HttpStatusCode.BadRequest, (HttpStatusCode) ((StatusCodeResult) actual).StatusCode);
     }
   }
 }
