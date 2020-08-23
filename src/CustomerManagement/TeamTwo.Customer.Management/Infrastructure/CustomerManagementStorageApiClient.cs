@@ -30,6 +30,7 @@ namespace TeamTwo.Customer.Management.Infrastructure
 
     async Task<CustomerInfo> ICustomerManagementStorageApiClient.StoreCustomerAsync(CustomerInfo customer)
     {
+      if (customer is null) throw new ArgumentNullException(nameof(customer));
       CloudTable table = await SetupCloudTableAsync();
       var insertOperation = TableOperation.Insert(_customerInfoMapper.MapToCustomerInfoStorageDto(customer));
       TableResult tableOpreationResult = await table.ExecuteAsync(insertOperation);

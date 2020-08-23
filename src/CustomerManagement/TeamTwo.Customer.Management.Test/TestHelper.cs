@@ -10,7 +10,8 @@ namespace TeamTwo.Customer.Management.Test
   {
     public static Guid CustomerId = Guid.NewGuid();
     public static Guid TenantId = Guid.NewGuid();
-
+    public static string CosmosDatabaseAccessKey { get; set; }
+    public static Uri CosmosDatabaseUri { get; set; }
     public static StoreCustomer GetStoreCustomerWithTestHelperDefaultValues()
     {
       return GetStoreCustomer(CustomerId);
