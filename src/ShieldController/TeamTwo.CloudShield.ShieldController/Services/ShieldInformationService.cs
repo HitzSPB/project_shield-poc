@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using TeamTwo.CloudShield.ShieldController.Infrastructure;
 using TeamTwo.CloudShield.ShieldController.Services.Models;
-using TeamTwo.CloudShield.ShieldController.Utilities;
 
 namespace TeamTwo.CloudShield.ShieldController.Services
 {
