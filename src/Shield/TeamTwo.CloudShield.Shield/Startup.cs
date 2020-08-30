@@ -1,4 +1,5 @@
-﻿using Microsoft.Azure.Functions.Extensions.DependencyInjection;
+﻿using System.Diagnostics.CodeAnalysis;
+using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using TeamTwo.CloudShield.Shield;
 using TeamTwo.CloudShield.Shield.Infrastructures;
@@ -9,6 +10,8 @@ using TeamTwo.CloudShield.Shield.Utilities;
 [assembly: FunctionsStartup(typeof(Startup))]
 namespace TeamTwo.CloudShield.Shield
 {
+
+  [ExcludeFromCodeCoverage]
   internal class Startup : FunctionsStartup
   {
     public override void Configure(IFunctionsHostBuilder builder)

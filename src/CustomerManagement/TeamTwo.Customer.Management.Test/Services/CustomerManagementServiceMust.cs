@@ -33,7 +33,7 @@ namespace TeamTwo.Customer.Management.Test.Services
       ICustomerManagementService sut = new CustomerManagementService(customerManagementStorageApiClient);
       A.CallTo(() => customerManagementStorageApiClient.StoreCustomerAsync(TestHelper.GetCustomerInfoWithTestHelperDefaultValues())).Returns(TestHelper.GetCustomerInfoWithTestHelperDefaultValues());
       // Act
-      CustomerInfo actual = await sut.GetCustomerInformationAsync(TestHelper.CustomerId);
+      CustomerInfo actual = await sut.StoreCustomerInformationAsync(TestHelper.CustomerId);
 
       // Assert
       Assert.NotNull(actual);

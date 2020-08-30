@@ -1,4 +1,5 @@
-﻿using Microsoft.Azure.Functions.Extensions.DependencyInjection;
+﻿using System.Diagnostics.CodeAnalysis;
+using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using TeamTwo.Customer.Management;
 using TeamTwo.Customer.Management.Infrastructure;
@@ -9,6 +10,7 @@ using TeamTwo.Customer.Management.Utilities;
 [assembly: FunctionsStartup(typeof(Startup))]
 namespace TeamTwo.Customer.Management
 {
+  [ExcludeFromCodeCoverage]
   internal class Startup : FunctionsStartup
   {
     public override void Configure(IFunctionsHostBuilder builder)

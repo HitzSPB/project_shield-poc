@@ -84,6 +84,29 @@ namespace TeamTwo.Customer.Management.Test
 
     [Fact]
     [Trait("Category", "UnitTest")]
+    public async Task GetBadResultWhenCustomerInfoObjectIsNullAsync()
+    {
+      // Arrange
+      ICustomerManagementService customerManagementService = A.Fake<ICustomerManagementService>();
+      ILogger logger = A.Fake<ILogger>();
+      var sut = new CustomerManagementFunctions(customerManagementService);
+      var httpContext = new DefaultHttpContext();
+      var httpRequest = new DefaultHttpRequest(httpContext)
+      {
+        Body = new MemoryStream(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(TestHelper.GetStoreCustomerWithTestHelperDefaultValues())))
+      };
+      A.CallTo(() => customerManagementService.StoreCustomerInformationAsync(TestHelper.CustomerId))
+        .Returns<CustomerInfo>(null);
+
+      // Act
+      IActionResult actual = await sut.StoreCustomerAsync(httpRequest);
+
+      // Assert
+      Assert.Equal(HttpStatusCode.BadRequest, (HttpStatusCode) ((StatusCodeResult) actual).StatusCode);
+    }
+
+    [Fact]
+    [Trait("Category", "UnitTest")]
     public async Task BeGetBadRequestWhenStoreCustomerIsCalledWithoutBodyAsync()
     {
       // Arrange

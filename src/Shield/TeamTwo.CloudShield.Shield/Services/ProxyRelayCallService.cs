@@ -22,6 +22,7 @@ namespace TeamTwo.CloudShield.Shield.Services
     {
       if (string.IsNullOrWhiteSpace(body)) throw new ArgumentNullException(nameof(body));
       if (string.IsNullOrWhiteSpace(tenantId)) throw new ArgumentNullException(nameof(tenantId));
+      if (string.IsNullOrWhiteSpace(url)) throw new ArgumentNullException(nameof(url));
       if (httpMethod is null) throw new ArgumentNullException(nameof(httpMethod));
 
       HybridConnectionDto hybridConnectionDto = await _storageApiClient.GetRelayFromIdAsync(tenantId);

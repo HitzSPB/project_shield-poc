@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace TeamTwo.CloudShield.Shield.Utilities
 {
+  [ExcludeFromCodeCoverage]
   public class ApplicationsSettingsService : IApplicationsSettingsService
   {
     string IApplicationsSettingsService.CloudProviderUrl => GetProcessEnvironmentVariable("TEAMTWO-CLOUD_PROVIDER_URL");
