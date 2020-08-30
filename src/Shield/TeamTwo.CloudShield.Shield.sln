@@ -5,9 +5,7 @@ VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamTwo.CloudShield.Shield", "TeamTwo.CloudShield.Shield\TeamTwo.CloudShield.Shield.csproj", "{558DC98F-74AE-4CDF-9AB9-5372D8FCA682}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{7AF1C1B2-692A-4AA4-B5A3-FBD6D298C651}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamTwo.CloudShield.Shield.Test", "Test\TeamTwo.CloudShield.Shield.Test\TeamTwo.CloudShield.Shield.Test.csproj", "{8B9D4EBA-5929-4A7E-915F-89C99102389C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamTwo.CloudShield.Shield.Test", "TeamTwo.CloudShield.Shield.Test\TeamTwo.CloudShield.Shield.Test.csproj", "{EB7016C9-B8E7-461C-AA02-C1A53017635D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,16 +17,13 @@ Global
 		{558DC98F-74AE-4CDF-9AB9-5372D8FCA682}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{558DC98F-74AE-4CDF-9AB9-5372D8FCA682}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{558DC98F-74AE-4CDF-9AB9-5372D8FCA682}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8B9D4EBA-5929-4A7E-915F-89C99102389C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8B9D4EBA-5929-4A7E-915F-89C99102389C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8B9D4EBA-5929-4A7E-915F-89C99102389C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8B9D4EBA-5929-4A7E-915F-89C99102389C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB7016C9-B8E7-461C-AA02-C1A53017635D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB7016C9-B8E7-461C-AA02-C1A53017635D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB7016C9-B8E7-461C-AA02-C1A53017635D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB7016C9-B8E7-461C-AA02-C1A53017635D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{8B9D4EBA-5929-4A7E-915F-89C99102389C} = {7AF1C1B2-692A-4AA4-B5A3-FBD6D298C651}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {69FE663C-86AA-4558-B8FB-6C463AF02C4F}

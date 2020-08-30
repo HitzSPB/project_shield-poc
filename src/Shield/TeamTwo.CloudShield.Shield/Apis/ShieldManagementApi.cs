@@ -62,12 +62,11 @@ namespace TeamTwo.CloudShield.Shield.Apis
             Route = "relay-management/")] HttpRequest req, ILogger log)
     {
       var requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-      if (requestBody is null) throw new InvalidOperationException(nameof(requestBody));
+      if (string.IsNullOrWhiteSpace(requestBody)) throw new InvalidOperationException(nameof(requestBody));
 
       CreateRelayStorageDto createRelayDto = JsonConvert.DeserializeObject<CreateRelayStorageDto>(requestBody);
-      if (string.IsNullOrWhiteSpace(createRelayDto.TenantId)) throw new InvalidOperationException(nameof(createRelayDto));
 
-      HybridConnectionDto hybridConnectionDto = await _relayManagementService.StoreRelayAsync(JsonConvert.DeserializeObject<CreateRelayStorageDto>(requestBody));
+      HybridConnectionDto hybridConnectionDto = await _relayManagementService.StoreRelayAsync(createRelayDto);
       if (hybridConnectionDto != null)
       {
         var listenerDto = new ListenerDto()
