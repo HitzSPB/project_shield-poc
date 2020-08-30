@@ -22,7 +22,6 @@ jobs:
       with:
         TEAMTWO_CLOUDPROVIDERSOURCE: './src/CloudProvider/TeamTwo.CloudProvider.Management.sln'
         TEAMTWO_CUSTOMERMANAGEMENTSOURCE: './src/CustomerManagement/TeamTwo.Customer.Management.sln'
-        TEAMTWO_DEMOSERVERSOURCE: './src/DemoServer/TeamTwo.CloudShield.DemoServer.sln'
         TEAMTWO_SHIELDSOURCE: './src/Shield/TeamTwo.CloudShield.Shield.sln'
         TEAMTWO_SHIELDCONTROLLERSOURCE: './src/ShieldController/TeamTwo.CloudShield.ShieldController.sln'
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -41,8 +40,6 @@ jobs:
     - name: Install dependencies $TEAMTWO_CUSTOMERMANAGEMENTSOURCE
       run: dotnet restore $TEAMTWO_CUSTOMERMANAGEMENTSOURCE
     - name: Install dependencies $TEAMTWO_DEMOSERVERSOURCE
-      run: dotnet restore $TEAMTWO_DEMOSERVERSOURCE
-    - name: Install dependencies $TEAMTWO_SHIELDSOURCE
       run: dotnet restore $TEAMTWO_SHIELDSOURCE
     - name: Install dependencies $TEAMTWO_SHIELDCONTROLLERSOURCE
       run: dotnet restore $TEAMTWO_SHIELDCONTROLLERSOURCE
@@ -54,8 +51,6 @@ jobs:
       run: dotnet build --configuration Release --no-restore $TEAMTWO_CLOUDPROVIDERSOURCE
     - name: Build $TEAMTWO_CUSTOMERMANAGEMENTSOURCE
       run: dotnet build --configuration Release --no-restore $TEAMTWO_CUSTOMERMANAGEMENTSOURCE
-    - name: Build $TEAMTWO_DEMOSERVERSOURCE
-      run: dotnet build --configuration Release --no-restore $TEAMTWO_DEMOSERVERSOURCE
     - name: Build $TEAMTWO_SHIELDSOURCE
       run: dotnet build --configuration Release --no-restore $TEAMTWO_SHIELDSOURCE
     - name: Build $TEAMTWO_SHIELDCONTROLLERSOURCE
@@ -65,8 +60,6 @@ jobs:
       run: dotnet test $TEAMTWO_CLOUDPROVIDERSOURCE --no-restore --verbosity normal --collect "XPlat Code coverage"
     - name: Test $TEAMTWO_CUSTOMERMANAGEMENTSOURCE
       run: dotnet test $TEAMTWO_CUSTOMERMANAGEMENTSOURCE --no-restore --verbosity normal --filter Category=UnitTest --collect "XPlat Code coverage"
-    - name: Test $TEAMTWO_DEMOSERVERSOURCE
-      run: dotnet test $TEAMTWO_DEMOSERVERSOURCE --no-restore --verbosity normal --collect "XPlat Code coverage"
     - name: Test $TEAMTWO_SHIELDSOURCE
       run: dotnet test $TEAMTWO_SHIELDSOURCE --no-restore --verbosity normal --collect "XPlat Code coverage"
     - name: Test $TEAMTWO_SHIELDCONTROLLERSOURCE
