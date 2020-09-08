@@ -1,3 +1,4 @@
+
 # project_shield-poc
 This repository includes multiple of solutions that together creates a poc how to create a shield around a old monolith application that supports API calls. It uses Azure resources so partners and other application can talk with it through Azure API Management and Azure Relay.
 
@@ -16,7 +17,7 @@ The following things should be added if you are going to use the project for a p
 - Some sort of backend to validate if is correct customer that creating relays
 # Diagram over the system
 Blueboxes er created in this POC and red boxes are a recommended final structure that are not created
-
+![enter image description here](https://i.ibb.co/85yJY7X/Relay.png)
 # How to start developing
 This is how to start developing
 ## Requirements 
